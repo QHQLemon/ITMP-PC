@@ -6,7 +6,7 @@
 <img src="https://github.com/QHQLemon/ITMP-PC/blob/master/intro-img/ITMP%E7%BD%91%E7%AB%99.png">
 
 ### 页面详情
-#### 主页面：网站主页面
+#### *主页面：网站主页面
 <img src="https://github.com/QHQLemon/ITMP-PC/blob/master/intro-img/001.png" >
 
 
