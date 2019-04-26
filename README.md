@@ -82,7 +82,7 @@
 <img src="https://github.com/QHQLemon/ITMP-PC/blob/master/intro-img/011.png" >
 </br></br>
 
-#### 2-6 登录界面：可分为学生登录和管理员登录
+#### 2-6 登录界面：可分为学生登录和管理员（教师）登录
 <img src="https://github.com/QHQLemon/ITMP-PC/blob/master/intro-img/023.png" >
 </br></br>
 
