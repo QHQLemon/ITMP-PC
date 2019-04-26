@@ -32,8 +32,15 @@
 
 
 > 测试/作业：展示各章节测试和作业，点击可进入详情，并提交答案
+<img src="https://github.com/QHQLemon/ITMP-PC/blob/master/intro-img/018.png" >
+</br>
 
-<img src="https://github.com/QHQLemon/ITMP-PC/blob/master/intro-img/004.png" >
+> 作业详情
+<img src="https://github.com/QHQLemon/ITMP-PC/blob/master/intro-img/019.png" >
+</br>
+
+> 测试详情
+<img src="https://github.com/QHQLemon/ITMP-PC/blob/master/intro-img/020.png" >
 </br>
 </br>
 
@@ -80,6 +87,7 @@
 </br>
 
 > 案例管理：可以增加、删除、修改、查询案例
+<img src="https://github.com/QHQLemon/ITMP-PC/blob/master/intro-img/017.png" >
 </br>
 
 > 作业管理：包含作业管理、作业成绩管理等，每个模块都有对应的增删改查功能，还有批改作业的功能
