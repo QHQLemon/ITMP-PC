@@ -35,7 +35,7 @@ export default {
       pagingList: [],
       pageNum: 0,
       total: "",
-      pageSize: 2,
+      pageSize: 5,
       themeList: [
         { themeTitle: 1, themeName: "项目综合管理" },
         { themeTitle: 2, themeName: "项目范围管理" },

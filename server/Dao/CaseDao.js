@@ -292,12 +292,30 @@ function getEnshrineByUserId(user_id, success){
   connection.end()
 }
 
+function getCaseByEnshrine( success) {
+  let connection = DBUtil.createConnection();
+  let params = [];
+  let sql  = `select * from case_info order by case_enshrine_num desc limit 7;`;
+
+  connection.connect();
+  connection.query(sql, params, (err, result) => {
+    if (err == null) {
+      success(result);
+    } else {
+      console.log(err)
+    }
+  })
+  connection.end()
+}
+
+// getCaseByEnshrine(res=>console.log(res))
 // getEnshrineByUserId('1511240134', res => {
 //   console.log(res);
 // })
 
 module.exports = {
   getCaseByPage,
+  getCaseByEnshrine,
   getAllCase,
   getCaseById,
   insertCase,

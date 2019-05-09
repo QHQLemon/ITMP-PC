@@ -11,12 +11,12 @@
         </div>
         <div class="section-container">
           <div class="courseware-item">
-            <a :href="item.chapter_courseware">
+            <router-link :to="{name: 'courseware', params: {chapter_id: item.chapter_id}}">
               <span class="courseware-header">课件</span>
               <span class="courseware-icon glyphicon glyphicon-record"></span>
               <span class="courseware-name">课程资料</span>
-              <span class="download">点击下载</span>
-            </a>
+              <span class="download">浏览课件</span>
+            </router-link>
           </div>
           <router-link
             tag="div"

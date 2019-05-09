@@ -20,8 +20,6 @@ function getChapterCount(chapter_name, success) {
   })
   connection.end()
 }
-
-
 function getChapterByPage(page, pageSize, searchWord, success) {
   let connection = DBUtil.createConnection();
   let params = [(page - 1) * pageSize, pageSize]
@@ -81,6 +79,7 @@ function getAllChapter( success) {
   connection.end()
 }
 
+
 function insertChapter(chapter_name, chapter_courseware , success){
   let connection = DBUtil.createConnection();
   let params = [chapter_name, chapter_courseware];
@@ -96,9 +95,6 @@ function insertChapter(chapter_name, chapter_courseware , success){
   })
   connection.end();
 }
-// insertChapter('第五章 ', 'http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx', (res) => {
-//   console.log(res)
-// })
 
 function updateChapter(chapter_id,  chapter_name, chapter_courseware , success){
   let connection = DBUtil.createConnection();
@@ -116,10 +112,6 @@ function updateChapter(chapter_id,  chapter_name, chapter_courseware , success){
   connection.end();
 }
 
-// updateChapter('5', '第 5 章  hahahah', 'http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx', (res) => {
-//   console.log(res)
-// })
-
 function deleteChapter (chapter_id, success){
   let connection = DBUtil.createConnection();
   let params = [chapter_id];
@@ -135,10 +127,6 @@ function deleteChapter (chapter_id, success){
   })
   connection.end();
 }
-
-// deleteChapter('6',  (res) => {
-//   console.log(res)
-// })
 
 function getChapterById(chapter_id,  success) {
   let connection = DBUtil.createConnection();
@@ -184,9 +172,6 @@ function getChapterAndSection(success){
   })
 }
 
-// getChapterAndSection(res => {
-//   console.log(res)
-// })
 
 module.exports = {
   getAllChapter,

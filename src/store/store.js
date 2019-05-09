@@ -5,9 +5,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     noticeList: [],
-    // userRouter: 'all'
-    userRouter: ['home', 'caseLeft', 'loginPage', 'notice', 'disLeft', 'courseOutline',
-    'courseHomework', 'courseContent', 'personal', 'learn', 'testSubmit', 'taskSubmit', 'caseDetail', 'disDetails', 'disAdd', 'disEdit', 'noRight']
+    userRouter: 'all'
+    // userRouter: ['home', 'caseLeft', 'loginPage', 'notice', 'disLeft', 'courseOutline',
+    // 'courseHomework', 'courseContent', 'personal', 'learn', 'testSubmit', 'taskSubmit', 'caseDetail', 'disDetails', 'disAdd', 'disEdit', 'noRight']
     // userRouter:  ['home', 'caseLeft', 'loginPage', 'notice', 'disLeft', 'courseOutline', 'courseHomework', 'courseContent']
   },
   mutations: {

@@ -17,5 +17,5 @@ files.forEach( (ele, index) => {
         }
     }
 })
-
+// console.log(pathMap)
 module.exports = pathMap;

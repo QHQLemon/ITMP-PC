@@ -23,6 +23,8 @@ import NoRight from '@/view/noRight'
 import CourseContent from '@/view/course/CourseContent'
 import CourseOutline from '@/view/course/CourseOutline'
 import CourseHomework from '@/view/course/CourseHomework'
+import Courseware from '@/view/course/Courseware'
+
 import NoticeAdd from '@/view/notice/NoticeAdd'
 import NoticeEdit from '@/view/notice/NoticeEdit'
 import DisLeft from '@/components/discussion/disLeft'
@@ -324,6 +326,12 @@ let router = new Router({
       path: '/learn/:section_id',
       name: 'learn',
       component: Learn
+    },
+
+    {
+      path: '/courseware/:chapter_id',
+      name: 'courseware',
+      component: Courseware
     }
   ]
 })

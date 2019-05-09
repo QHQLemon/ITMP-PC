@@ -1,6 +1,5 @@
 let mysql = require('mysql');    //引入require
 
-
 function createConnection () {
   let connection = mysql.createConnection({       //配置数据库信息
     host: '127.0.0.1',

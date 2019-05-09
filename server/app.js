@@ -8,18 +8,13 @@ let multer = require('multer');
 let Jwt = require('./Jwt');
 let util = require('./util/util')
 
-
 let app = express();
-
-
 
 app.use(history());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // 访问静态资源
 app.use(express.static(path.resolve(__dirname, '../dist')));
-
-
 
 app.use(function (req, res, next) {
   let commonUser = ['/getAllNotice', '/getChapterAndSection', '/getAllCase', '/getAllChapter', '/getAllTopic', '/login', '/getRight']
@@ -29,16 +24,14 @@ app.use(function (req, res, next) {
     '/getTestByChapterId', '/checkAndInsertTestAnswer', '/getTestScoreByChapterIdAndStudentId', '/deleteTestScoreByChapterIdAndStudentId',
     '/getTestAnswerByChapterId', '/insertTopic', '/queryTopicById', '/deleteTopicById', '/updateTopic', '/addTopicLookOrLikeOrReply',
     '/getReplyByTopicId', '/updateReply', '/deleteReplyById', '/getSectionById', '/getTopicLike', '/insertReply', '/insertTopicLike','/deleteTopicLike',
-  '/getUserMsg', '/getEnshrineByUserId','/getReplyByUserId' , '/getTopicByUserId']
+  '/getUserMsg', '/getEnshrineByUserId','/getReplyByUserId' , '/getTopicByUserId', '/getCaseByEnshrine']
 
-  console.log('api url    ' + req.url);
   let userPortList;
 
   //是否登录或登录是否有效 token是否有效
   var cert = new Jwt(req.headers.token).verifyToken();
   console.log('verify   ', cert)
   console.log('admin   ' + cert.admin);
-
 
   var nextFlag = false;
   if (cert == 'error') {
@@ -72,14 +65,12 @@ app.use(function (req, res, next) {
       res.end();
     }
   }
-
-
 })
 
 app.get('/getRight', function (request, response) {
   let commonUserRouter = ['home', 'caseLeft', 'loginPage', 'notice', 'disLeft', 'courseOutline', 'courseHomework', 'courseContent']
   let studentUserRouter = ['home', 'caseLeft', 'loginPage', 'notice', 'disLeft', 'courseOutline',
-    'courseHomework', 'courseContent', 'personal', 'learn', 'testSubmit', 'taskSubmit', 'caseDetail', 'disDetails', 'disAdd', 'disEdit', 'noRight']
+    'courseHomework', 'courseContent', 'personal', 'learn', 'testSubmit', 'taskSubmit', 'caseDetail', 'disDetails', 'disAdd', 'disEdit', 'noRight', 'courseware']
   var cert = new Jwt(request.headers.token).verifyToken();
   let userRouter;
   if (cert == 'error') {
@@ -105,7 +96,6 @@ app.post('/getReplyByUserId', loader.get('/getReplyByUserId'))
 app.post('/getTopicByUserId', loader.get('/getTopicByUserId'))
 app.post('/getUserMsg', loader.get('/getUserMsg'))
 
-
 // 公告
 app.get('/getAllNotice', loader.get('/getAllNotice'))
 app.post('/getNoticeById', loader.get('/getNoticeById'))
@@ -114,7 +104,7 @@ app.post('/updateNotice', loader.get('/updateNotice'))
 app.post('/deleteNotice', loader.get('/deleteNotice'))
 
 //章节
-app.get('/getAllChapter', loader.get('/getAllChapter'))
+// app.get('/getAllChapter', loader.get('/getAllChapter'))
 
 
 //作业
@@ -124,8 +114,6 @@ app.post('/updateTask', loader.get('/updateTask'))
 app.post('/deleteTask', loader.get('/deleteTask'))
 app.post('/getTaskByChapterId', loader.get('/getTaskByChapterId'))
 
-
-
 // 作业分数
 app.get('/getTaskScoreByPage', loader.get('/getTaskScoreByPage'))
 app.post('/insertTaskScore', loader.get('/insertTaskScore'))
@@ -134,8 +122,6 @@ app.post('/deleteTaskScore', loader.get('/deleteTaskScore'))
 app.post('/getTaskScoreByTaskId', loader.get('/getTaskScoreByTaskId'))
 app.post('/getTaskScoreByTaskIdAndStudentId', loader.get('/getTaskScoreByTaskIdAndStudentId'))
 
-
-
 // 测试
 app.get('/getTestByPage', loader.get('/getTestByPage'))
 app.post('/insertTest', loader.get('/insertTest'))
@@ -143,24 +129,15 @@ app.post('/updateTest', loader.get('/updateTest'))
 app.post('/deleteTest', loader.get('/deleteTest'))
 app.post('/getTestByChapterId', loader.get('/getTestByChapterId'))
 
-
-
-
 //测试分数
 app.get('/getTestScoreByPage', loader.get('/getTestScoreByPage'))
 app.post('/checkAndInsertTestAnswer', loader.get('/checkAndInsertTestAnswer'))
 app.post('/getTestScoreByChapterIdAndStudentId', loader.get('/getTestScoreByChapterIdAndStudentId'))
 app.post('/deleteTestScoreByChapterIdAndStudentId', loader.get('/deleteTestScoreByChapterIdAndStudentId'))
 
-
-
-
-
 // 测试答案
 app.get('/getTestAnswerByPage', loader.get('/getTestAnswerByPage'))
 app.post('/getTestAnswerByChapterId', loader.get('/getTestAnswerByChapterId'));
-
-
 
 // 班级
 app.get('/queryClassByPage', loader.get('/queryClassByPage'))
@@ -175,8 +152,6 @@ app.post('/insertStudent', loader.get('/insertStudent'))
 app.post('/updateStudent', loader.get('/updateStudent'))
 app.post('/deleteStudent', loader.get('/deleteStudent'))
 
-
-
 // 主题
 app.post('/getAllTopic', loader.get('/getAllTopic'));
 app.post('/queryTopicByTitle', loader.get('/queryTopicByTitle'));
@@ -185,7 +160,6 @@ app.post('/queryTopicById', loader.get('/queryTopicById'));
 app.post('/deleteTopicById', loader.get('/deleteTopicById'));
 app.post('/updateTopic', loader.get('/updateTopic'));
 app.post('/addTopicLookOrLikeOrReply', loader.get('/addTopicLookOrLikeOrReply'));
-
 
 // 回复
 app.post('/getReplyByTopicId', loader.get('/getReplyByTopicId'));
@@ -196,8 +170,6 @@ app.post('/insertTopicLike', loader.get('/insertTopicLike'));
 app.post('/deleteTopicLike', loader.get('/deleteTopicLike'));
 app.post('/getTopicLike', loader.get('/getTopicLike'));
 
-
-
 // 章
 app.get('/getAllChapter', loader.get('/getAllChapter'))
 app.post('/getChapterById', loader.get('/getChapterById'))
@@ -206,8 +178,6 @@ app.post('/updateChapter', loader.get('/updateChapter'))
 app.post('/deleteChapter', loader.get('/deleteChapter'))
 app.get('/getChapterByPage', loader.get('/getChapterByPage'))
 app.get('/getChapterAndSection', loader.get('/getChapterAndSection'))
-
-
 
 // //节
 app.get('/getAllSection', loader.get('/getAllSection'))
@@ -218,16 +188,9 @@ app.post('/updateSection', loader.get('/updateSection'))
 app.post('/deleteSection', loader.get('/deleteSection'))
 app.get('/getSectionByPage', loader.get('/getSectionByPage'))
 
-
-
-// upload
-// app.post('/upload', uploadSingle.single('myfile'), loader.get('/upload'))
-// app.get('/getVideo', loader.get('/getVideo'))
-
-
-
 // 案例
 app.post('/getAllCase', loader.get('/getAllCase'))
+app.get('/getCaseByEnshrine', loader.get('/getCaseByEnshrine'))
 app.post('/getCaseById', loader.get('/getCaseById'))
 app.get('/getCaseByPage', loader.get('/getCaseByPage'))
 app.post('/insertCase', loader.get('/insertCase'))
@@ -243,10 +206,7 @@ app.post('/insertAdmin', loader.get('/insertAdmin'))
 app.post('/updateAdmin', loader.get('/updateAdmin'))
 app.post('/deleteAdmin', loader.get('/deleteAdmin'))
 
-
 app.post('/login', loader.get('/login'))
-
-
 
 // 监听
 app.listen(8080, function () {

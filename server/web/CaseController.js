@@ -26,6 +26,17 @@ function getAllCase(request, response) {
 // getAllCase()
 path.set('/getAllCase', getAllCase);
 
+function getCaseByEnshrine(request, response) {
+  console.log('fksjdfkjsdkfasdkf------------')
+  CaseDao.getCaseByEnshrine(function (result) {
+    response.writeHead(200, { 'content-type': 'text/html; charset=utf8' });
+    response.write(util.packData('200', '获取数据成功', result));
+    response.end()
+  })
+}
+
+path.set('/getCaseByEnshrine', getCaseByEnshrine);
+
 function getCaseById(request, response) {
   let postData = request.body.params;
   CaseDao.getCaseById(postData.case_id, function (result) {
