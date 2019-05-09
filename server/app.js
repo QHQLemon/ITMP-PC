@@ -32,6 +32,7 @@ app.use(function (req, res, next) {
   var cert = new Jwt(req.headers.token).verifyToken();
   console.log('verify   ', cert)
   console.log('admin   ' + cert.admin);
+  console.log('url', req.url)
 
   var nextFlag = false;
   if (cert == 'error') {
@@ -48,7 +49,6 @@ app.use(function (req, res, next) {
 
 
   if (userPortList == 'all') {
-    console.log('enter all')
     next()
   } else {
     for(let i = 0; i < userPortList.length; i++){
@@ -209,8 +209,8 @@ app.post('/deleteAdmin', loader.get('/deleteAdmin'))
 app.post('/login', loader.get('/login'))
 
 // 监听
-app.listen(8080, function () {
-  console.log('success listen...8080');
+app.listen(80, function () {
+  console.log('success listen...80');
 });
 
 
