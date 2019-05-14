@@ -12,7 +12,6 @@ export default {
     axios
       .get("/getRight")
       .then(function(response) {
-        console.log(response.data.data);
         self.$store.commit("initUserRouter", response.data.data);
         console.log("store", self.$store.state.userRouter);
       })

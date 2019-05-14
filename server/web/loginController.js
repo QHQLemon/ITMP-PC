@@ -24,7 +24,6 @@ function login(request, response) {
       } else {
         console.log('error')
         response.writeHead(404);
-        // response.write(util.packData('404', '账号或密码错误'))
         response.end()
 
       }
@@ -41,27 +40,54 @@ function login(request, response) {
         });
         let token = cert.getToken();
         response.writeHead(200, { 'content-type': 'text/html; charset=utf8' });
-        response.write(util.packData('200', '登录成功', [{ token, user_id: res[0].admin_id, user_name: res[0].admin_name  }]));
+        response.write(util.packData('200', '登录成功', [{ token, user_id: res[0].admin_id, user_name: res[0].admin_name }]));
         response.end()
       } else {
         console.log('error')
         response.writeHead(404);
-        // response.write(util.packData('404', '账号或密码错误'))
         response.end()
 
       }
     })
 
   }
-  // let urlData = url.parse(request.url, true).query;
-  // console.log(urlData)
-  // AdminDao.login(urlData.page, parseInt(urlData.rows), function (result, total) {
-  //   response.writeHead(200, { 'content-type': 'text/html; charset=utf8' });
-  //   response.write(util.ppData(result, total));
-  //   response.end()
-  // })
 }
 
 path.set('/login', login);
 
-module.exports.path = path;
+function changePwd(request, response) {
+  console.log('-------------------')
+  let postData = request.body.params;
+  console.log(postData)
+  var cert = new Jwt(request.headers.token).verifyToken();
+  console.log('verify   ', cert)
+  if (cert.admin) {  //管理员
+    AdminDao.changePwd(2, postData.userId, postData.oldPwd, postData.newPwd, res => {
+      if (res === true) {
+        response.writeHead(200, { 'content-type': 'text/html; charset=utf8' });
+        response.write(util.packData('200', '修改成功'));
+        response.end()
+      } else {
+        console.log('error')
+        response.writeHead(404);
+        response.end()
+      }
+    })
+  } else {  //学生
+    AdminDao.changePwd(1, postData.userId, postData.oldPwd, postData.newPwd, res => {
+      if (res === true) {
+        response.writeHead(200, { 'content-type': 'text/html; charset=utf8' });
+        response.write(util.packData('200', '修改成功'));
+        response.end()
+      } else {
+        console.log('error')
+        response.writeHead(404);
+        response.end()
+      }
+    })
+  }
+}
+path.set('/changePwd', changePwd)
+
+
+  module.exports.path = path;

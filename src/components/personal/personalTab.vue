@@ -30,6 +30,11 @@
         </div>
       </div>
     </div>
+    <div class="col-md-2">
+      <router-link  :to="{name: 'changePwd'}" class="btn change-btn">
+        修改密码
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -59,5 +64,11 @@ export default {
 .nav.nav-tabs li:hover a {
   background: #db6f6a;
   color: #fff;
+}
+.change-btn{
+  padding: 10px 50px;
+  margin-top: 40px;
+  color: #fff;
+  background: #dd6f6a;
 }
 </style>

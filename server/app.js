@@ -24,7 +24,7 @@ app.use(function (req, res, next) {
     '/getTestByChapterId', '/checkAndInsertTestAnswer', '/getTestScoreByChapterIdAndStudentId', '/deleteTestScoreByChapterIdAndStudentId',
     '/getTestAnswerByChapterId', '/insertTopic', '/queryTopicById', '/deleteTopicById', '/updateTopic', '/addTopicLookOrLikeOrReply',
     '/getReplyByTopicId', '/updateReply', '/deleteReplyById', '/getSectionById', '/getTopicLike', '/insertReply', '/insertTopicLike','/deleteTopicLike',
-  '/getUserMsg', '/getEnshrineByUserId','/getReplyByUserId' , '/getTopicByUserId', '/getCaseByEnshrine']
+  '/getUserMsg', '/getEnshrineByUserId','/getReplyByUserId' , '/getTopicByUserId', '/getCaseByEnshrine', '/changePwd']
 
   let userPortList;
 
@@ -68,9 +68,9 @@ app.use(function (req, res, next) {
 })
 
 app.get('/getRight', function (request, response) {
-  let commonUserRouter = ['home', 'caseLeft', 'loginPage', 'notice', 'disLeft', 'courseOutline', 'courseHomework', 'courseContent']
+  let commonUserRouter = ['/index.html','home', 'caseLeft', 'loginPage', 'notice', 'disLeft', 'courseOutline', 'courseHomework', 'courseContent']
   let studentUserRouter = ['home', 'caseLeft', 'loginPage', 'notice', 'disLeft', 'courseOutline',
-    'courseHomework', 'courseContent', 'personal', 'learn', 'testSubmit', 'taskSubmit', 'caseDetail', 'disDetails', 'disAdd', 'disEdit', 'noRight', 'courseware']
+    'courseHomework', 'courseContent', 'personal', 'learn', 'testSubmit', 'taskSubmit', 'caseDetail', 'disDetails', 'disAdd', 'disEdit', 'noRight', 'courseware', 'changePwd']
   var cert = new Jwt(request.headers.token).verifyToken();
   let userRouter;
   if (cert == 'error') {
@@ -207,9 +207,11 @@ app.post('/updateAdmin', loader.get('/updateAdmin'))
 app.post('/deleteAdmin', loader.get('/deleteAdmin'))
 
 app.post('/login', loader.get('/login'))
+app.post('/changePwd', loader.get('/changePwd'))
+
 
 // 监听
-app.listen(80, function () {
+app.listen(8080, function () {
   console.log('success listen...80');
 });
 

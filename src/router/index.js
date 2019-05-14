@@ -16,6 +16,7 @@ import TestSubmit from '@/view/TestSubmit'
 import TaskSubmit from '@/view/taskSubmit'
 import Personal from '@/view/Personal'
 import LoginPage from '@/view/LoginPage'
+import ChangePwd from '@/view/ChangePwd'
 import NoRight from '@/view/noRight'
 
 
@@ -94,6 +95,11 @@ let router = new Router({
           path: 'loginPage',
           name: 'loginPage',
           component: LoginPage
+        },
+        {
+          path: 'changePwd',
+          name: 'changePwd',
+          component:  ChangePwd
         },
         {
           path: 'noticeAdd',

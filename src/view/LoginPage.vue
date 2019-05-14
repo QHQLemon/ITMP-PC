@@ -32,7 +32,7 @@ export default {
       errorWord: "",
       userType: "",
       errorList: {
-        loginError: "*账号或者密码错误，请从新输入",
+        loginError: "*账号或者密码错误，请重新输入",
         userEmpty: "*账号不能为空",
         pwdEmpty: "*密码不能为空",
         empty: "*请输入账号及密码"
@@ -46,10 +46,13 @@ export default {
       console.log(this.userType);
       if (this.userName == "" && this.userPwd == "") {
         this.errorWord = this.errorList.empty;
+         $.bootstrapLoading.end();
       } else if (this.userName == "") {
         this.errorWord = this.errorList.userEmpty;
+         $.bootstrapLoading.end();
       } else if (this.userPwd == "") {
         this.errorWord = this.errorList.pwdEmpty;
+         $.bootstrapLoading.end();
       } else {
         let self = this;
         axios
@@ -61,7 +64,6 @@ export default {
             }
           })
           .then(function(response) {
-            console.log(response.data.data[0]);
             window.localStorage.setItem("token", response.data.data[0].token);
             window.localStorage.setItem(
               "user_id",
@@ -79,15 +81,15 @@ export default {
           .catch(function(err) {
             self.errorWord = self.errorList.loginError;
             self.userPwd = "";
+            $.bootstrapLoading.end();
             console.log(err);
           });
       }
     },
     getRight() {
       let self = this;
-      axios.defaults.headers.common["token"] = localStorage.getItem("token");
-      axios.defaults.headers.post["Content-Type"] =
-        "application/json;charset=utf-8"; //配置请求头
+      // axios.defaults.headers.common["token"] = localStorage.getItem("token");
+      // axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8"; //配置请求头
       axios
         .get("/getRight")
         .then(function(response) {
