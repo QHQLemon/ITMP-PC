@@ -7,6 +7,4 @@ confArr.forEach((ele, index) => {
     globalConfig[ele.split("=")[0]] = ele.split("=")[1]
 })
 
-
-
 module.exports = globalConfig

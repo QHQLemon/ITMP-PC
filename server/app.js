@@ -24,7 +24,7 @@ app.use(function (req, res, next) {
     '/getTestByChapterId', '/checkAndInsertTestAnswer', '/getTestScoreByChapterIdAndStudentId', '/deleteTestScoreByChapterIdAndStudentId',
     '/getTestAnswerByChapterId', '/insertTopic', '/queryTopicById', '/deleteTopicById', '/updateTopic', '/addTopicLookOrLikeOrReply',
     '/getReplyByTopicId', '/updateReply', '/deleteReplyById', '/getSectionById', '/getTopicLike', '/insertReply', '/insertTopicLike','/deleteTopicLike',
-  '/getUserMsg', '/getEnshrineByUserId','/getReplyByUserId' , '/getTopicByUserId', '/getCaseByEnshrine', '/changePwd']
+  '/getUserMsg', '/getEnshrineByUserId','/getReplyByUserId' , '/getTopicByUserId', '/getCaseByEnshrine', '/changePwd', '/getCaseByPage']
 
   let userPortList;
 
