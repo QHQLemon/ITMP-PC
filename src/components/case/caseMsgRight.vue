@@ -2,7 +2,8 @@
   <div class="case-msg-right">
     <div class="case-msg-right-header">
       <div class="col-lg-5 input-group">
-        <select class="form-control" v-model="caseId">
+        <select class="form-control" v-model="caseId"
+            @change="seachAction">
           <option value>全部主题</option>
           <option
             v-for="(item, index) in themeList"
@@ -30,7 +31,7 @@
 export default {
   data() {
     return {
-      caseId: "1",
+      caseId: "",
       themeList: [
         { themeTitle: 1, themeName: "项目综合管理" },
         { themeTitle: 2, themeName: "项目范围管理" },
@@ -96,7 +97,7 @@ export default {
           var temp = {
             rows: params.limit, //页面大小
             page: params.offset / params.limit + 1, //页码
-            case_id: self.caseId
+            case_type: self.caseId
           };
           return temp;
         },
@@ -149,16 +150,22 @@ export default {
           {
             field: "case_media_path",
             title: "媒体地址",
-            width: 200
+            formatter: function(value, row, index) {
+              return value.slice(0, 10) + '...';
+            }
           },
           {
             field: "media_type",
             title: "媒体类型",
-            width: 200
           },
           {
             field: "case_ppt",
             title: "ppt",
+            formatter: function(value, row, index) {
+              if(value){
+                return value.slice(0, 10) + '...';
+              }
+            }
           },
           {
             field: "case_type",

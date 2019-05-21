@@ -6,6 +6,7 @@ let path = new Map();
 
 function getCaseByPage(request, response) {
   let urlData = url.parse(request.url, true).query;
+  console.log(urlData);
   CaseDao.getCaseByPage(urlData.page, parseInt(urlData.rows), urlData.case_type, function (result, total) {
     response.writeHead(200, { 'content-type': 'text/html; charset=utf8' });
     response.write(util.ppData(result, total));

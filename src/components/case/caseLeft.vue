@@ -11,7 +11,9 @@
     </div>
     <div class="case-show-container" v-if="caseList.length !== 0 ">
       <case-item v-for="(item, index) in caseList" :key="index" :caseItem="item"></case-item>
-      <paging-plugin :myPage="nowPage" :pagingList="pagingList" :pageNum="pageNum" @changePage="changeNowPage"></paging-plugin>
+      <div class="page-container">
+        <paging-plugin :myPage="nowPage" :pagingList="pagingList" :pageNum="pageNum" @changePage="changeNowPage"></paging-plugin>
+      </div>
     </div>
     <div class="no-case-item" v-else>
       <div class="no-data">
@@ -201,6 +203,7 @@ export default {
   padding: 10px;
   padding-bottom: 50px;
   min-height: 600px;
+  position: relative;
 }
 .no-case-item {
   margin-top: 30px;
@@ -224,5 +227,10 @@ export default {
   font-size: 20px;
   font-weight: 600;
   color: #333;
+}
+.page-container{
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
 }
 </style>

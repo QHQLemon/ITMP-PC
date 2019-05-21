@@ -39,18 +39,18 @@ export default {
     return {
       chapterId: "",
       chapterList: [
-        {
-          chapter_id: "1",
-          chapter_name: "第1章 总论"
-        },
-        {
-          chapter_id: "2",
-          chapter_name: "第2章 项目管理和IT背景"
-        },
-        {
-          chapter_id: "1",
-          chapter_name: "第3章 项目管理过程组"
-        }
+        // {
+        //   chapter_id: "1",
+        //   chapter_name: "第1章 总论"
+        // },
+        // {
+        //   chapter_id: "2",
+        //   chapter_name: "第2章 项目管理和IT背景"
+        // },
+        // {
+        //   chapter_id: "1",
+        //   chapter_name: "第3章 项目管理过程组"
+        // }
       ]
     };
   },
@@ -152,7 +152,15 @@ export default {
           },
           {
             field: "chapter_id",
-            title: "所属章节"
+            title: "所属章节",
+            formatter: function(value, row, index) {
+              let len = self.chapterList.length;
+              for(let i = 0; i < len; i++){
+                if(value == self.chapterList[i].chapter_id){
+                  return self.chapterList[i].chapter_name;
+                }
+              }
+            }
           },
           {
             field: "operate",

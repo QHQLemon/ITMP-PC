@@ -142,20 +142,7 @@ export default {
       taskEditContent: "ksfjlasfalsd",
       taskEditScore: "20",
       taskEditId: "",
-      chapterList: [
-        {
-          chapter_id: "1",
-          chapter_name: "第1章 总论"
-        },
-        {
-          chapter_id: "2",
-          chapter_name: "第2章 项目管理和IT背景"
-        },
-        {
-          chapter_id: "1",
-          chapter_name: "第3章 项目管理过程组"
-        }
-      ]
+      chapterList: []
     };
   },
   methods: {
@@ -302,7 +289,16 @@ export default {
           },
           {
             field: "chapter_id",
-            title: "所属章节"
+            title: "所属章节",
+             formatter: function(value, row, index) {
+              let len = self.chapterList.length;
+              console.log(self.chapterList, value);
+              for(let i = 0; i < len; i++){
+                if(value == self.chapterList[i].chapter_id){
+                  return self.chapterList[i].chapter_name;
+                }
+              }
+            }
           },
           {
             field: "operate",

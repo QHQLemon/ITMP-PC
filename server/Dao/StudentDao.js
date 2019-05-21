@@ -79,8 +79,6 @@ function insertStudent(student_id, student_name, student_pwd, student_class_id, 
   let params = [student_id, student_name, student_pwd, student_class_id];
   let sql = 'insert into student (student_id, student_name, student_pwd, student_class_id) values (?, ?, ?, ?);';
 
-
-
   connection.connect();
 
   connection.query(sql, params, (err, result) => {
@@ -95,6 +93,31 @@ function insertStudent(student_id, student_name, student_pwd, student_class_id, 
   });
   connection.end();
 }
+
+function insertMoreStudent(dataArr, success) {
+  let connection = DBUtil.createConnection();
+  console.log(dataArr);
+  let params = dataArr;
+  let sql = 'insert into student(student_id, student_name, student_pwd, student_class_id) values ?;';
+
+  connection.connect();
+
+  connection.query(sql, [params], (err, result) => {
+    if (err == null) {
+      success(result);
+      addClassMoreNum(dataArr[0][3],dataArr.length, (res) => {
+        console.log('add');
+      })
+    } else {
+      console.log(err)
+    }
+  });
+  connection.end();
+}
+
+// insertMoreStudent([[1511240101, 'aa', 123456, 1], [1511240102, 'bb', 123456, 1]], res => {
+//   console.log(res)
+// })
 
 function updateStudent(student_id, student_name, student_pwd, student_class_id, student_old_class_id, success) {
   let connection = DBUtil.createConnection();
@@ -191,6 +214,24 @@ function addClassNum (class_id, success){
   connection.end();
 }
 
+function addClassMoreNum (class_id, num,  success){
+  let connection = DBUtil.createConnection();
+  let params = [num, class_id];
+  let sql = 'update class set class_num = class_num + ? where class_id = ?;';
+
+  connection.connect();
+  connection.query(sql, params, (err, result) => {
+    if(err == null){
+      success(result)
+    }else{
+      console.log(err)
+    }
+  })
+  connection.end();
+}
+
+
+
 function desClassNum (class_id, success){
   let connection = DBUtil.createConnection();
   let params = [class_id];
@@ -213,7 +254,8 @@ module.exports = {
   updateStudentPwd,
   deleteStudent,
   deleteStudentByClassId,
-  queryStudentByPage
+  queryStudentByPage,
+  insertMoreStudent
 }
 
 

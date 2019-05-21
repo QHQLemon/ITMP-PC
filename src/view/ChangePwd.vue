@@ -23,39 +23,37 @@
         <div class="change-error">{{errorWord}}</div>
       </div>
     </div>
-     <div
-    class="modal fade"
-    id="changeModal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myModalLabel"
-  >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <h4 class="modal-title" id="myModalLabel">通知</h4>
-        </div>
-        <div class="modal-body">
-          <p>密码已修改成功</p>
-        </div>
-        <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
-          <button
-            type="button"
-            class="btn btn-primary"
-            @click="goPersonal"
-            data-dismiss="modal"
-          >知道了</button>
+    <div
+      class="modal fade"
+      id="changeModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">通知</h4>
+          </div>
+          <div class="modal-body">
+            <p>密码已修改成功</p>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="goPersonal"
+              data-dismiss="modal"
+            >知道了</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
-
-
 </template>
 
 <script>
@@ -94,7 +92,7 @@ export default {
           .then(function(response) {
             console.log(response.data.data);
             $.bootstrapLoading.end();
-            $('#changeModal').modal('show');
+            $("#changeModal").modal("show");
           })
           .catch(function(err) {
             self.errorWord = "你的旧密码与服务器存储不一致，请重新输入";
@@ -106,13 +104,12 @@ export default {
           });
       }
     },
-    goPersonal(){
-      this.$router.push({name: 'personal'})
+    goPersonal() {
+      this.$router.push({ name: "personal" });
     }
   },
   mounted() {
     this.userId = window.localStorage.getItem("user_id");
-
   }
 };
 </script >

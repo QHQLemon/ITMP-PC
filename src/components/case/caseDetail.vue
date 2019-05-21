@@ -146,7 +146,6 @@ export default {
         })
         .then(function(response) {
           self.caseItem = response.data.data[0];
-          $.bootstrapLoading.end();
         })
         .catch(function(err) {
           console.log(err);
@@ -205,7 +204,6 @@ export default {
     }
   },
   mounted() {
-    $.bootstrapLoading.start();
     this.caseId = this.$route.params.case_id;
     this.studentId = localStorage.getItem("user_id");
     this.getCaseById();

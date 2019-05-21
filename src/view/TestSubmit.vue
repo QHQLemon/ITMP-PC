@@ -52,7 +52,7 @@
               </div>
             </div>
             <div class="test-list-footer">
-              <button class="btn my-btn" @click="submitTestAnswer" v-if="!completeFlag">提交答案</button>
+              <button class="btn my-btn" @click="submitTestAnswer" v-if="isStudent && !completeFlag">提交答案</button>
               <router-link
                 class="btn my-btn return-btn"
                 tag="button"
@@ -78,20 +78,21 @@
 export default {
   data() {
     return {
+      isStudent: true,
       chapterId: "",
       chapterName: "",
       studentId: "",
       completeFlag: false,
-      student_total_score: 20,
+      student_total_score: 0,
       submitStudentAnswer: {
-        "1": "A",
-        "2": "C",
-        "3": "D"
+        // "1": "A",
+        // "2": "C",
+        // "3": "D"
       },
       test_answer: {
-        "1": "A",
-        "2": "D",
-        "3": "C"
+        // "1": "A",
+        // "2": "D",
+        // "3": "C"
       },
       testList: [
         // {
@@ -260,6 +261,9 @@ export default {
     this.chapterName = this.$route.params.chapter_name;
     this.studentId = localStorage.getItem("user_id");
     this.getTestByChapterId();
+    if(this.$store.state.userRouter === 'all'){
+      this.isStudent = false;
+    }
   }
 };
 </script >

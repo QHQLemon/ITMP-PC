@@ -33,7 +33,7 @@
       </p>
       <div class="dis-content">
         <div class="col-lg-8">
-          <router-view></router-view>
+          <router-view ref="showBox"></router-view>
         </div>
         <div class="col-lg-3">
           <dis-right></dis-right>
@@ -58,7 +58,9 @@ export default {
   },
   methods: {
       queryTopic(){
-        console.log(this.topicTitle)
+        console.log(this.topicTitle);
+        console.log(this.$refs);
+        this.$refs.showBox.getData(this.topicTitle);
       }
   },
   mounted() {

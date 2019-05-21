@@ -9,6 +9,23 @@ let Jwt = require('./Jwt');
 let util = require('./util/util')
 
 let app = express();
+// let uploadSingle = multer({dest: "./file/", filename: "student.xlsx"})
+var storage = multer.diskStorage({
+
+  //设置上传后文件路径
+     destination: function (req, file, cb) {
+         cb(null, './file')
+    },
+  //给上传文件重命名，获取添加后缀名
+   filename: function (req, file, cb) {
+       var fileFormat = (file.originalname).split(".");
+       cb(null, 'student.xlsx');
+   }
+  });
+  //添加配置文件到multer对象。
+  var uploadSingle = multer({
+       storage: storage
+ });
 
 app.use(history());
 app.use(bodyParser.json());
@@ -17,14 +34,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
 app.use(function (req, res, next) {
-  let commonUser = ['/getAllNotice', '/getChapterAndSection', '/getAllCase', '/getAllChapter', '/getAllTopic', '/login', '/getRight']
+  let commonUser = ['/getAllNotice', '/getChapterAndSection','/getAllCase', '/getCaseByPage', '/getAllChapter', '/getAllTopic', '/login', '/getRight', '/getCaseByEnshrine', '/favicon.ico']
   let studentUser = ['/getAllNotice', '/getSectionMaxId', '/getChapterAndSection', '/getAllCase', '/getAllChapter', '/getAllTopic', '/login', '/getRight',
     '/getChapterAndSection', '/getCaseById', '/addStudentEnshrine', '/minusStudentEnshrine', '/getStudentAndEnshrine',
     '/getTaskByChapterId', '/insertTaskScore', '/getTaskScoreByTaskId', '/getTaskScoreByTaskIdAndStudentId',
     '/getTestByChapterId', '/checkAndInsertTestAnswer', '/getTestScoreByChapterIdAndStudentId', '/deleteTestScoreByChapterIdAndStudentId',
     '/getTestAnswerByChapterId', '/insertTopic', '/queryTopicById', '/deleteTopicById', '/updateTopic', '/addTopicLookOrLikeOrReply',
     '/getReplyByTopicId', '/updateReply', '/deleteReplyById', '/getSectionById', '/getTopicLike', '/insertReply', '/insertTopicLike','/deleteTopicLike',
-  '/getUserMsg', '/getEnshrineByUserId','/getReplyByUserId' , '/getTopicByUserId', '/getCaseByEnshrine', '/changePwd', '/getCaseByPage']
+  '/getUserMsg', '/getEnshrineByUserId','/getReplyByUserId' , '/getTopicByUserId', '/getCaseByEnshrine', '/changePwd', '/getCaseByPage', '/favicon.ico']
 
   let userPortList;
 
@@ -52,7 +69,7 @@ app.use(function (req, res, next) {
     next()
   } else {
     for(let i = 0; i < userPortList.length; i++){
-      if(userPortList[i] == req.url){
+      if(userPortList[i] == req.url || userPortList[i].indexOf('/getCaseByPage')){
         nextFlag = true;
         next();
         break;
@@ -60,7 +77,6 @@ app.use(function (req, res, next) {
     }
     console.log(nextFlag)
     if (!nextFlag) {
-      console.log('adfasdfadsf')
       res.writeHead(401);
       res.end();
     }
@@ -68,7 +84,7 @@ app.use(function (req, res, next) {
 })
 
 app.get('/getRight', function (request, response) {
-  let commonUserRouter = ['/index.html','home', 'caseLeft', 'loginPage', 'notice', 'disLeft', 'courseOutline', 'courseHomework', 'courseContent']
+  let commonUserRouter = ['home', 'caseLeft', 'loginPage', 'notice', 'disLeft', 'courseOutline', 'courseHomework', 'courseContent']
   let studentUserRouter = ['home', 'caseLeft', 'loginPage', 'notice', 'disLeft', 'courseOutline',
     'courseHomework', 'courseContent', 'personal', 'learn', 'testSubmit', 'taskSubmit', 'caseDetail', 'disDetails', 'disAdd', 'disEdit', 'noRight', 'courseware', 'changePwd']
   var cert = new Jwt(request.headers.token).verifyToken();
@@ -97,7 +113,7 @@ app.post('/getTopicByUserId', loader.get('/getTopicByUserId'))
 app.post('/getUserMsg', loader.get('/getUserMsg'))
 
 // 公告
-app.get('/getAllNotice', loader.get('/getAllNotice'))
+app.post('/getAllNotice', loader.get('/getAllNotice'))
 app.post('/getNoticeById', loader.get('/getNoticeById'))
 app.post('/insertNotice', loader.get('/insertNotice'))
 app.post('/updateNotice', loader.get('/updateNotice'))
@@ -209,6 +225,7 @@ app.post('/deleteAdmin', loader.get('/deleteAdmin'))
 app.post('/login', loader.get('/login'))
 app.post('/changePwd', loader.get('/changePwd'))
 
+app.post('/upload', uploadSingle.single("file"), loader.get('/upload'))
 
 // 监听
 app.listen(8080, function () {

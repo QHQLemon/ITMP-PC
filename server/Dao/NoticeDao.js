@@ -1,10 +1,10 @@
 let DBUtil = require ('./dbutil.js');
 
 
-function queryAllNotice (success) {
+function queryAllNotice (word, success) {
   let connection = DBUtil.createConnection();
 
-  let sql = 'select * from notice order by notice_utime desc;';
+  let sql = `select * from notice where notice_content like  '%` + word + `%' order by notice_utime desc;`;
 
   connection.connect();
   connection.query(sql , (err, result) => {
@@ -16,6 +16,9 @@ function queryAllNotice (success) {
   })
   connection.end();
 }
+// queryAllNotice('', res => {
+//   console.log(res)
+// })
 
 // function queryAllNotice (page, pageSize, sortOrder,searchWord, success) {
 //   let connection = DBUtil.createConnection();

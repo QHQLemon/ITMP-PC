@@ -23,6 +23,8 @@ a:link{
   background: #db6f6a;
   color: #fff;
 }
+button,
+button:active,
 button:focus,
 button:active:focus,
 button.active:focus,
@@ -33,3 +35,4 @@ button.active.focus {
     border-color: transparent;
     box-shadow:none;
 }
+

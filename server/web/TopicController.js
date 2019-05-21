@@ -6,11 +6,13 @@ let path = new Map();
 // 按要求查询主题
 function getAllTopic(request, response) {
   let postData = request.body.params;
-  console.log(postData.topic_type, postData.order_type)
-  TopicDao.queryTopicByTypeAndOrder(postData.topic_type, postData.order_type, (result) => {
+  console.log(postData)
+  TopicDao.queryTopicByTypeAndOrder(postData.page, parseInt(postData.pageSize),postData.topic_type, postData.order_type, postData.word, function (total, result) {
     response.writeHead(200, { 'content-type': 'text/html; charset=utf8' });
-    response.write(util.packData('200', '获取数据成功', result));
-    response.end();
+    response.write(util.ppData(result, total));
+
+    console.log(result,total)
+    response.end()
   })
 }
 path.set('/getAllTopic', getAllTopic)

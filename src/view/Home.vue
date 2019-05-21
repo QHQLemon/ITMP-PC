@@ -25,7 +25,8 @@
       <div class="about-in">
         <p>课堂·讨论·案例</p>
       </div>
-      <div class="item col-sm-6 col-md-4 col-xs-12">
+      <div class="about-content">
+        <div class="item col-sm-6 col-md-4 col-xs-12">
         <div class="item-in">
           <p>
             <span class="glyphicon glyphicon-blackboard item-icon"></span>
@@ -64,6 +65,7 @@
           <router-link tag="span" :to="{name: 'case'}" class="btn btn-default">了解更多</router-link>
         </div>
       </div>
+      </div>
     </div>
 
   </div>
@@ -101,15 +103,16 @@ case-container {
   margin-top: 80px;
   text-align: center;
   margin-bottom: 250px;
+
+}
+.about-content{
+  justify-content: space-between;
+  display: flex;
 }
 .item:hover {
-  animation: change 2s linear;
+   box-shadow: 1px 1px 1px 1px #888;;
 }
-@keyframes change {
-  50% {
-    box-shadow: 1px 1px 1px 1px #888;
-  }
-}
+
 .about .about-in {
   height: 80px;
   font-size: 20px;
@@ -117,6 +120,7 @@ case-container {
 
 .about .item {
   padding: 10px 30px;
+  max-width: 320px;
 }
 
 .item .item-title {

@@ -21,11 +21,11 @@
                   <small>（{{item.task_score}}）分</small>
                 </h4>
                 <p class="task-question">{{item.task_content}}</p>
-                <p>答：</p>
-                <textarea name id class rows="8" :id="'taskAnswer' + item.task_id"></textarea>
+                <p v-if="isStudent">答：</p>
+                <textarea v-if="isStudent" name id class rows="8" :id="'taskAnswer' + item.task_id"></textarea>
               </div>
               <div class="task-content-footer clearfix">
-                <button class="btn my-btn" @click="sumbitTask">提交作业</button>
+                <button class="btn my-btn" @click="sumbitTask" v-if="isStudent">提交作业</button>
               </div>
             </div>
           </div>
@@ -62,6 +62,7 @@ export default {
   },
   data() {
     return {
+      isStudent: true,
       studentId: "",
       completeFlag: 0,
       chapterId: "",
@@ -157,6 +158,9 @@ export default {
     this.chapterName = this.$route.params.chapter_name;
     this.studentId = localStorage.getItem("user_id");
     this.getTaskByChapterId();
+    if(this.$store.state.userRouter === 'all'){
+      this.isStudent = false;
+    }
   }
 };
 </script >

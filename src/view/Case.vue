@@ -4,7 +4,7 @@
       <p>首页 &nbsp;>&nbsp; 经典案例</p>
       <div class="case-content">
         <div class="case-tab col-md-8">
-          <router-view></router-view>
+          <router-view :key="key"></router-view>
         </div>
         <div class="hot-case col-md-3">
           <case-right></case-right>
@@ -22,6 +22,11 @@ export default {
   components: {
     caseLeft,
     caseRight
+  },
+  computed: {
+    key(){
+      return this.$route.path + Math.random();
+    }
   }
 };
 </script >

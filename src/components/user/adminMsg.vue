@@ -252,7 +252,9 @@ export default {
           {
             field: "admin_pwd",
             title: "密码",
-            searchable: false
+            formatter: function(value, row, index) {
+              return  '*'.repeat(value.length)
+            }
           },
           {
             field: "operate",

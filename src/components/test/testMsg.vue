@@ -184,25 +184,8 @@ export default {
       chapterEditId: 1,
       oldChapterId: "",
       chapterId: "",
-      chapterList: [
-        {
-          chapter_id: "1",
-          chapter_name: "第1章 总论"
-        },
-        {
-          chapter_id: "2",
-          chapter_name: "第2章 项目管理和IT背景"
-        },
-        {
-          chapter_id: "1",
-          chapter_name: "第3章 项目管理过程组"
-        }
-      ]
+      chapterList: []
     };
-  },
-  mounted() {
-    this.InitMainTable();
-    this.getAllChapter();
   },
   methods: {
     getAllChapter() {
@@ -278,6 +261,7 @@ export default {
     InitMainTable() {
       let $table;
       let self = this;
+      console.log(self.chapterList,  '-------')
       //记录页面bootstrap-table全局变量$table，方便应用
       $table = $("#table").bootstrapTable({
         url: "/getTestByPage", //请求后台的URL（*）
@@ -308,7 +292,7 @@ export default {
 
         ajaxOptions: {
           headers: {
-            'Content-type': "application/json;charset=utf-8",
+            "Content-type": "application/json;charset=utf-8",
             token: localStorage.getItem("token")
           }
         },
@@ -377,7 +361,16 @@ export default {
           },
           {
             field: "chapter_id",
-            title: "所属章节"
+            title: "所属章节",
+            formatter: function(value, row, index) {
+              let len = self.chapterList.length;
+              console.log(self.chapterList, value);
+              for (let i = 0; i < len; i++) {
+                if (value == self.chapterList[i].chapter_id) {
+                  return self.chapterList[i].chapter_name;
+                }
+              }
+            }
           },
           {
             field: "operate",
@@ -417,14 +410,18 @@ export default {
             }
           }
         ],
-        onLoadSuccess: function() {
-        },
+        onLoadSuccess: function() {},
         onLoadError: function() {
           console.log("数据加载失败！");
         }
       });
     }
-  }
+  },
+
+  mounted() {
+    this.InitMainTable();
+    this.getAllChapter();
+  },
 };
 </script >
 

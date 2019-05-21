@@ -5,23 +5,38 @@
       &nbsp;{{sortId == false ? '' : '>'}}&nbsp; {{disSort[sortId]}}
     </div>
     <div class="topic_order btn-group">
-      <button class="btn btn-default btn-sm order-active" @click="change(0)">最新发表</button>
-      <button class="btn btn-default btn-sm" @click="change(1)">浏览数</button>
-      <button class="btn btn-default btn-sm" @click="change(2)">回复数</button>
-      <button class="btn btn-default btn-sm" @click="change(3)">点赞数</button>
+      <button class="btn btn-default  btn-sm order-active" @click="change(0)">最新发表</button>
+      <button class="btn btn-default  btn-sm" @click="change(1)">浏览数</button>
+      <button class="btn btn-default  btn-sm" @click="change(2)">回复数</button>
+      <button class="btn  btn-default btn-sm" @click="change(3)">点赞数</button>
     </div>
     <div v-for="(item, index) in topicList" :key="index">
       <dis-item :topicItem="item" :sortId="sortId"></dis-item>
+    </div>
+    <div class="page-container">
+      <paging-plugin
+        :myPage="nowPage"
+        :pagingList="pagingList"
+        :pageNum="pageNum"
+        @changePage="changeNowPage"
+      ></paging-plugin>
     </div>
   </div>
 </template>
 
 <script>
 import disItem from "./disItem";
+import pagingPlugin from "@/components/paging/pagingPlugin";
 
 export default {
   data() {
     return {
+      searchWord: "",
+      nowPage: 1,
+      pagingList: [],
+      pageNum: 0,
+      total: "",
+      pageSize: 5,
       disSort: ["", "老师答疑区", "全班讨论区"],
       sortId: 0,
       orderTypeIndex: 0,
@@ -91,9 +106,45 @@ export default {
     };
   },
   components: {
-    disItem
+    disItem,
+    pagingPlugin
   },
   methods: {
+    getPagingList() {
+      this.pagingList = [];
+      this.pageNum = (this.total + this.pageSize - 1) / this.pageSize;
+      if (this.nowPage > 2) {
+        this.pagingList.push({
+          text: this.nowPage - 2,
+          page: this.nowPage - 2
+        });
+      }
+      if (this.nowPage > 1) {
+        this.pagingList.push({
+          text: this.nowPage - 1,
+          page: this.nowPage - 1
+        });
+      }
+
+      this.pagingList.push({ text: this.nowPage, page: this.nowPage });
+
+      if (this.nowPage + 1 <= this.pageNum) {
+        this.pagingList.push({
+          text: this.nowPage + 1,
+          page: this.nowPage + 1
+        });
+      }
+      if (this.nowPage + 2 <= this.pageNum) {
+        this.pagingList.push({
+          text: this.nowPage + 2,
+          page: this.nowPage + 2
+        });
+      }
+    },
+    changeNowPage(page) {
+      this.nowPage = page;
+      this.getData();
+    },
     change(index) {
       // 请求数据
       this.orderTypeIndex = index;
@@ -103,19 +154,24 @@ export default {
         .eq(index)
         .addClass("order-active");
     },
-    getData() {
+    getData(val = "") {
       let self = this;
-      console.log(this.sortId, this.orderList[this.orderTypeIndex]);
+      console.log('val---', val)
       axios
         .post("/getAllTopic", {
           params: {
             topic_type: self.sortId,
-            order_type: self.orderList[self.orderTypeIndex]
+            order_type: self.orderList[self.orderTypeIndex],
+            page: self.nowPage,
+            pageSize: self.pageSize,
+            word: val
           }
         })
         .then(function(response) {
+          self.topicList = response.data.data.rows;
+          self.total = response.data.data.total;
           console.log(response.data.data);
-          self.topicList = response.data.data;
+          self.getPagingList();
         })
         .catch(function(error) {
           console.log(error);
@@ -139,6 +195,7 @@ export default {
 <style scoped>
 .dis-left {
   position: relative;
+  min-height: 800px;
 }
 .dis-left-header {
   height: 50px;
@@ -153,5 +210,10 @@ export default {
   background: #db6f6a;
   color: #fff;
   border: 1px solid #ccc;
+}
+.page-container {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
 }
 </style>

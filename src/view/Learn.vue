@@ -45,7 +45,7 @@
         </button>
         <p
           class="course-title"
-        >第 {{ sectionItem.chapter_id }} 章 第 {{ sectionItem.order_num }} 节 {{sectionItem.section_name }}</p>
+        > 第 {{ sectionItem.order_num }} 节 {{sectionItem.section_name }}</p>
       </div>
       <div class="player-container">
         <div class="player">

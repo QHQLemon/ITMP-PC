@@ -1,19 +1,48 @@
 <template>
   <div class="student-msg">
     <div class="student-header clearfix">
-      <div class="col-lg-5">
+      <!-- <div class="col-lg-5">
         <div class="input-group">
           <input type="text" id="searchWord" class="form-control" placeholder="关键字...">
           <span class="input-group-btn">
             <button class="btn btn-default my-btn" type="button" @click="seachAction">搜索</button>
           </span>
         </div>
+      </div> -->
+      <div class="col-lg-5 input-group">
+        <select
+          class="form-control"
+          name="class"
+          id="classId"
+          v-model="classId"
+          @change="seachAction"
+        >
+          <option value>全部班级</option>
+          <option
+            v-for="(item, index) in classList"
+            :value="item.class_id"
+            :key="index"
+          >{{item.class_name}}</option>
+        </select>
       </div>
       <div class="student-add">
         <button class="btn my-btn" data-toggle="modal" data-target="#addStudentModal">
           增加数据
           <span class="glyphicon glyphicon-plus"></span>
         </button>
+      </div>
+      <div class="student-more">
+        <!-- <input type="file" class="form-control" >
+          批量导入
+          <span class="glyphicon glyphicon-plus"></span>
+        </input>-->
+        <span class="btn my-btn fileinput-button">
+          <span>
+            批量导入
+            <span class="glyphicon glyphicon-plus"></span>
+          </span>
+          <input type="file" @change="readFile">
+        </span>
       </div>
     </div>
     <!-- <hr class="featurette-divider"> -->
@@ -126,6 +155,36 @@
         </div>
       </div>
     </div>
+        <!-- excel提示框 -->
+    <!-- <div
+      class="modal fade"
+      id="noExcelModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">通知</h4>
+          </div>
+          <div class="modal-body">
+            <p>{{msg}}</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="goPersonal"
+              data-dismiss="modal"
+            >知道了</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
   </div>
 </template>
 
@@ -133,6 +192,8 @@
 export default {
   data() {
     return {
+      classId: "",
+      msg: "",
       studentId: "",
       studentName: "",
       studentPwd: "",
@@ -143,17 +204,17 @@ export default {
       classEditId: "",
       oldClassId: "",
       classList: [
-        { class_id: 1, class_name: "信息管理与信息系统151班", class_num: 1 },
-        { class_id: 2, class_name: "信息管理与信息系统161班", class_num: 0 },
-        { class_id: 3, class_name: "信息管理与信息系统162班", class_num: 0 },
-        { class_id: 4, class_name: "信息管理与信息系统141班", class_num: 0 },
-        { class_id: 6, class_name: "信息科学151班", class_num: 0 },
-        { class_id: 7, class_name: "信息科学141班", class_num: 0 },
-        { class_id: 8, class_name: "管理科学151班", class_num: 0 },
-        { class_id: 9, class_name: "管理科学161班", class_num: 0 },
-        { class_id: 10, class_name: "应用数学151班", class_num: 0 },
-        { class_id: 11, class_name: "汉语言文学151班", class_num: 0 },
-        { class_id: 13, class_name: "进阶班", class_num: 1 }
+        // { class_id: 1, class_name: "信息管理与信息系统151班", class_num: 1 },
+        // { class_id: 2, class_name: "信息管理与信息系统161班", class_num: 0 },
+        // { class_id: 3, class_name: "信息管理与信息系统162班", class_num: 0 },
+        // { class_id: 4, class_name: "信息管理与信息系统141班", class_num: 0 },
+        // { class_id: 6, class_name: "信息科学151班", class_num: 0 },
+        // { class_id: 7, class_name: "信息科学141班", class_num: 0 },
+        // { class_id: 8, class_name: "管理科学151班", class_num: 0 },
+        // { class_id: 9, class_name: "管理科学161班", class_num: 0 },
+        // { class_id: 10, class_name: "应用数学151班", class_num: 0 },
+        // { class_id: 11, class_name: "汉语言文学151班", class_num: 0 },
+        // { class_id: 13, class_name: "进阶班", class_num: 1 }
       ]
     };
   },
@@ -260,7 +321,7 @@ export default {
 
         ajaxOptions: {
           headers: {
-            'Content-type': "application/json;charset=utf-8",
+            "Content-type": "application/json;charset=utf-8",
             token: localStorage.getItem("token")
           }
         },
@@ -273,7 +334,7 @@ export default {
             page: params.offset / params.limit + 1, //页码
             sort: "notice_id", //排序列名
             sortOrder: params.order, //排位命令（desc，asc）
-            searchWord: $("#searchWord").val()
+            searchWord: self.classId
           };
           return temp;
         },
@@ -313,13 +374,22 @@ export default {
           {
             field: "student_pwd",
             title: "密码",
-            searchable: false
+            formatter: function(value, row, index) {
+              return  '*'.repeat(value.length)
+            }
           },
           {
             field: "student_class_id",
             title: "所属班级",
-            sortable: true,
-            searchable: false
+            formatter: function(value, row, index) {
+              let len = self.classList.length;
+              console.log(self.classList, value);
+              for (let i = 0; i < len; i++) {
+                if (value == self.classList[i].class_id) {
+                  return self.classList[i].class_name;
+                }
+              }
+            }
           },
           {
             field: "operate",
@@ -335,6 +405,7 @@ export default {
                 self.studentEditPwd = row.student_pwd;
                 self.classEditId = row.student_class_id;
                 self.oldClassId = row.student_class_id;
+                self.updateStudent();
               },
               "click .delete": function(e, value, row, index) {
                 axios
@@ -365,6 +436,40 @@ export default {
         //   EditViewById(id, "view");
         // }
       });
+    },
+    readFile(e) {
+      var file = e.target.files[0];
+      console.log(e.target.files[0].name);
+      var zh = /[^\.]+$/;
+      var files_name = e.target.files[0].name.match(zh);
+      console.log(files_name[0]);
+      if (files_name[0] !== "xlsx") {
+        // this.msg = "请选择excel表格";
+        // $("#noExcelModal").modal("show");
+        alert("请选择excel表格");
+      } else {
+        // $.bootstrapLoading.start();
+        var form = new FormData();
+        console.log(file)
+        form.append("file", file);
+        let self = this;
+        axios
+          .post("/upload", form)
+          .then(function(response) {
+            alert("插入数据成功");
+            // $.bootstrapLoading.end();
+            // self.msg = "插入数据成功";
+            // $("#noExcelModal").modal("show");
+            $("#table").bootstrapTable("refresh");
+          })
+          .catch(function(err) {
+            // $.bootstrapLoading.end();
+            alert("excel表格数据不匹配，请重新选择");
+            // self.msg = "excel表格数据不匹配，请重新选择";
+            // $("#noExcelModal").modal("show");
+            console.log(err);
+          });
+      }
     }
   },
   mounted() {
@@ -390,5 +495,20 @@ export default {
   position: absolute;
   right: 0;
   top: 0;
+}
+.student-more {
+  position: absolute;
+  right: 130px;
+  top: 0px;
+  overflow: hidden;
+  height: 33px;
+}
+.student-more input {
+  opacity: 0;
+  -ms-filter: "alpha(opacity=0)";
+  width: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>

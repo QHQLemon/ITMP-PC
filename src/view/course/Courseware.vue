@@ -1,9 +1,9 @@
 <template>
 <div class="courseware-container">
 
-  <iframe src="https://itmp-1259164243.cos.ap-guangzhou.myqcloud.com/chapter1.html" frameborder="0">
+  <!-- <iframe src="https://www.91suke.com/s/47f075aa" frameborder="0"> -->
 
-  <!-- <iframe :src="chapterMsg.chapter_courseware" frameborder="0"> -->
+  <iframe :src="chapterMsg.chapter_courseware" frameborder="0">
   </iframe>
 </div>
 </template>
@@ -44,8 +44,6 @@ export default{
 .courseware-container, iframe{
   width: 100%;
   height: 100%;
-  margin: 0 auto;
-  background: rgb(40, 40, 40);
 }
 .courseware-container{
   overflow-y: hidden;

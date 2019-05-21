@@ -6,7 +6,7 @@
       <div class="chpater-item" v-for="(item, index) in CASList" :key="index">
         <div class="chapter-container">
           <span class="chapter-header">章节</span>
-          <span class="chapter-num">{{item.chapter_id}}</span>
+          <span class="chapter-num">{{index + 1}}</span>
           <span class="chapter-name">{{item.chapter_name}}</span>
         </div>
         <div class="section-container">
@@ -44,148 +44,148 @@ export default {
   data() {
     return {
       CASList: [
-        {
-          chapter_id: 1,
-          chapter_name: "总论",
-          chapter_courseware: "http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx",
-          sectionList: [
-            {
-              section_id: 1,
-              section_name: "第 1 节 引言",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 1
-            },
-            {
-              section_id: 2,
-              section_name: "第 2 节  项目及项目管理",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 1
-            },
-            {
-              section_id: 3,
-              section_name: "项目群和项目组合管理",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 1
-            },
-            {
-              section_id: 4,
-              section_name: "项目经理的作用",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 1
-            }
-          ]
-        },
-        {
-          chapter_id: 2,
-          chapter_name: "项目管理和IT背景",
-          chapter_courseware: "http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx",
-          sectionList: [
-            {
-              section_id: 5,
-              section_name: "项目管理的系统观",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 2
-            },
-            {
-              section_id: 6,
-              section_name: "干系人管理",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 2
-            },
-            {
-              section_id: 7,
-              section_name: "项目生命周期",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 2
-            }
-          ]
-        },
-        {
-          chapter_id: 3,
-          chapter_name: "项目管理过程组",
-          chapter_courseware: "http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx",
-          sectionList: [
-            {
-              section_id: 8,
-              section_name: "项目管理过程组及其映射知识领域",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 3
-            },
-            {
-              section_id: 9,
-              section_name: "开发项目管理的方法学",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 3
-            },
-            {
-              section_id: 10,
-              section_name: "案例研究：JWD咨询公司项目",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 3
-            },
-            {
-              section_id: 11,
-              section_name: "过程组模板",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 3
-            }
-          ]
-        },
-        {
-          chapter_id: 4,
-          chapter_name: "项目综合管理",
-          chapter_courseware: "http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx",
-          sectionList: [
-            {
-              section_id: 12,
-              section_name: "什么是项目综合管理",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 4
-            },
-            {
-              section_id: 13,
-              section_name: "项目选择",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 4
-            },
-            {
-              section_id: 14,
-              section_name: "制订项目章程",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 4
-            },
-            {
-              section_id: 15,
-              section_name: "指导和管理项目实施",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 4
-            },
-            {
-              section_id: 16,
-              section_name: "监控项目工作",
-              section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
-              chapter_id: 4
-            }
-          ]
-        },
-        {
-          chapter_id: 5,
-          chapter_name: "项目范围管理",
-          chapter_courseware: "http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx",
-          sectionList: []
-        },
-        {
-          chapter_id: 6,
-          chapter_name: "项目时间管理",
-          chapter_courseware: "http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx",
-          sectionList: []
-        },
-        {
-          chapter_id: 7,
-          chapter_name: "项目成本管理",
-          chapter_courseware: "http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx",
-          sectionList: []
-        }
+        // {
+        //   chapter_id: 1,
+        //   chapter_name: "总论",
+        //   chapter_courseware: "http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx",
+        //   sectionList: [
+        //     {
+        //       section_id: 1,
+        //       section_name: "第 1 节 引言",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 1
+        //     },
+        //     {
+        //       section_id: 2,
+        //       section_name: "第 2 节  项目及项目管理",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 1
+        //     },
+        //     {
+        //       section_id: 3,
+        //       section_name: "项目群和项目组合管理",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 1
+        //     },
+        //     {
+        //       section_id: 4,
+        //       section_name: "项目经理的作用",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 1
+        //     }
+        //   ]
+        // },
+        // {
+        //   chapter_id: 2,
+        //   chapter_name: "项目管理和IT背景",
+        //   chapter_courseware: "http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx",
+        //   sectionList: [
+        //     {
+        //       section_id: 5,
+        //       section_name: "项目管理的系统观",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 2
+        //     },
+        //     {
+        //       section_id: 6,
+        //       section_name: "干系人管理",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 2
+        //     },
+        //     {
+        //       section_id: 7,
+        //       section_name: "项目生命周期",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 2
+        //     }
+        //   ]
+        // },
+        // {
+        //   chapter_id: 3,
+        //   chapter_name: "项目管理过程组",
+        //   chapter_courseware: "http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx",
+        //   sectionList: [
+        //     {
+        //       section_id: 8,
+        //       section_name: "项目管理过程组及其映射知识领域",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 3
+        //     },
+        //     {
+        //       section_id: 9,
+        //       section_name: "开发项目管理的方法学",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 3
+        //     },
+        //     {
+        //       section_id: 10,
+        //       section_name: "案例研究：JWD咨询公司项目",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 3
+        //     },
+        //     {
+        //       section_id: 11,
+        //       section_name: "过程组模板",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 3
+        //     }
+        //   ]
+        // },
+        // {
+        //   chapter_id: 4,
+        //   chapter_name: "项目综合管理",
+        //   chapter_courseware: "http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx",
+        //   sectionList: [
+        //     {
+        //       section_id: 12,
+        //       section_name: "什么是项目综合管理",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 4
+        //     },
+        //     {
+        //       section_id: 13,
+        //       section_name: "项目选择",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 4
+        //     },
+        //     {
+        //       section_id: 14,
+        //       section_name: "制订项目章程",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 4
+        //     },
+        //     {
+        //       section_id: 15,
+        //       section_name: "指导和管理项目实施",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 4
+        //     },
+        //     {
+        //       section_id: 16,
+        //       section_name: "监控项目工作",
+        //       section_video: "http://ppdzfcm6e.bkt.clouddn.com/job_demo.mp4",
+        //       chapter_id: 4
+        //     }
+        //   ]
+        // },
+        // {
+        //   chapter_id: 5,
+        //   chapter_name: "项目范围管理",
+        //   chapter_courseware: "http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx",
+        //   sectionList: []
+        // },
+        // {
+        //   chapter_id: 6,
+        //   chapter_name: "项目时间管理",
+        //   chapter_courseware: "http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx",
+        //   sectionList: []
+        // },
+        // {
+        //   chapter_id: 7,
+        //   chapter_name: "项目成本管理",
+        //   chapter_courseware: "http://ppdzfcm6e.bkt.clouddn.com/jQueryxin.pptx",
+        //   sectionList: []
+        // }
       ]
     };
   },
