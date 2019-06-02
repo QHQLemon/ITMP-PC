@@ -194,7 +194,7 @@ export default {
                 });
               },
               "click .delete": function(e, value, row, index) {
-                axios
+                self.axios
                   .post("/deleteCase", {
                     params: {
                       case_id: row.case_id

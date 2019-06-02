@@ -157,7 +157,7 @@ export default {
     getData(val = "") {
       let self = this;
       console.log('val---', val)
-      axios
+     this.axios
         .post("/getAllTopic", {
           params: {
             topic_type: self.sortId,

@@ -58,7 +58,7 @@ export default {
     getAllNotice() {
       let self = this;
       console.log(self.keyword);
-      axios
+      this.axios
         .post("/getAllNotice", {
           params: {
             searchWord: self.keyword

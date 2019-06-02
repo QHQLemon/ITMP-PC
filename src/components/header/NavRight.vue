@@ -18,6 +18,7 @@
           <router-link tag="li" :to="{name: 'caseMsg'}">案例管理</router-link>
           <router-link tag="li" :to="{name: 'task'}">作业管理</router-link>
           <router-link tag="li" :to="{name: 'test'}">测试管理</router-link>
+          <router-link tag="li" :to="{name: 'topicMsg'}">敏感词管理</router-link>
           <li class="m-divider"></li>
           <li @click="exitLogin">退出登录</li>
         </ul>
@@ -89,10 +90,10 @@ export default {
     },
     getRight() {
       let self = this;
-      axios.defaults.headers.common["token"] = localStorage.getItem("token");
-      axios.defaults.headers.post["Content-Type"] =
+      this.axios.defaults.headers.common["token"] = localStorage.getItem("token");
+      this.axios.defaults.headers.post["Content-Type"] =
         "application/json;charset=utf-8"; //配置请求头
-      axios
+      this.axios
         .get("/getRight")
         .then(function(response) {
           self.$store.commit("initUserRouter", response.data.data);

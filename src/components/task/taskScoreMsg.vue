@@ -113,7 +113,7 @@ export default {
     },
     editScore() {
       let self = this;
-      axios
+      this.axios
         .post("/updateTaskScore", {
           params: {
             task_id: self.editTaskId,
@@ -248,7 +248,7 @@ export default {
                 self.editState = row.task_score_state;
               },
               "click .delete": function(e, value, row, index) {
-                axios
+                self.axios
                   .post("/deleteTaskScore", {
                     params: {
                       task_id: row.task_id,

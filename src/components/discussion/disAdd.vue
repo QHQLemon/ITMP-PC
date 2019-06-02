@@ -38,7 +38,9 @@ export default {
       disContent: "",
       disType: 1,
       userId: "",
-      userName: ""
+      userName: "",
+      submitFlag: true,
+      noGoodWord: []
     };
   },
   components: {
@@ -48,31 +50,57 @@ export default {
     changeText(text) {
       this.disContent = text;
     },
-    submitdis() {
-      console.log(this.disTitle, this.disContent, this.disType);
+    getAllBan() {
       let self = this;
-      axios
-        .post("/insertTopic", {
-          params: {
-            topic_title: self.disTitle,
-            topic_content: self.disContent,
-            topic_type: self.disType,
-            user_id: self.userId,
-            user_name: self.userName
-          }
-        })
+      this.axios
+        .get("/getAllBan")
         .then(function(response) {
-          console.log(response);
-          self.$router.push({ name: "disLeft", params: { sort: 0 } });
+          self.noGoodWord = response.data.data;
         })
         .catch(function(error) {
           console.log(error);
         });
+    },
+    submitdis() {
+      let len = this.noGoodWord.length;
+      console.log(this.disTitle, this.disContent, this.noGoodWord)
+      for (let i = 0; i < len; i++) {
+        let word = this.noGoodWord[i].ban_word;
+        if (
+          this.disTitle.indexOf(word) != -1 ||
+          this.disContent.indexOf(word) != -1
+        ) {
+          this.submitFlag = false;
+          alert("你所提交的主题含有涉及不符合国家法律的内容，请重新输入并提交");
+          window.location.reload();
+        }
+      }
+      if (this.submitFlag) {
+        let self = this;
+        this.axios
+          .post("/insertTopic", {
+            params: {
+              topic_title: self.disTitle,
+              topic_content: self.disContent,
+              topic_type: self.disType,
+              user_id: self.userId,
+              user_name: self.userName
+            }
+          })
+          .then(function(response) {
+            console.log(response);
+            self.$router.push({ name: "disLeft", params: { sort: 0 } });
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
     }
   },
   mounted() {
     this.userId = localStorage.user_id;
     this.userName = localStorage.user_name;
+    this.getAllBan();
   }
 };
 </script >

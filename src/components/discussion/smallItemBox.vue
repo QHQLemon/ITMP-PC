@@ -28,32 +28,58 @@ export default {
     return {
       userId: "",
       userName: "",
-      replySmallContent: ""
+      replySmallContent: "",
+      submitFlag: true,
+      noGoodWord: []
     };
   },
   components: {
     smallItem
   },
   methods: {
-    postSmallReply() {
+    getAllBan() {
       let self = this;
-      axios
-        .post("/insertReply", {
-          params: {
-            reply_type: 1,
-            reply_content: self.replySmallContent,
-            from_id: self.userId,
-            from_name: self.userName,
-            reply_to_id: self.replyId
-          }
-        })
+      this.axios
+        .get("/getAllBan")
         .then(function(response) {
-          console.log(response.data, "加smallreply");
-          window.location.reload();
+          self.noGoodWord = response.data.data;
         })
         .catch(function(error) {
           console.log(error);
         });
+    },
+
+    postSmallReply() {
+      let len = this.noGoodWord.length;
+      console.log(this.replySmallContent, this.noGoodWord);
+      for (let i = 0; i < len; i++) {
+        let word = this.noGoodWord[i].ban_word;
+        if (this.replySmallContent.indexOf(word) != -1) {
+          this.submitFlag = false;
+          alert("你所提交的主题含有涉及不符合国家法律的内容，请重新输入并提交");
+          window.location.reload();
+        }
+      }
+      if (this.submitFlag) {
+        let self = this;
+        this.axios
+          .post("/insertReply", {
+            params: {
+              reply_type: 1,
+              reply_content: self.replySmallContent,
+              from_id: self.userId,
+              from_name: self.userName,
+              reply_to_id: self.replyId
+            }
+          })
+          .then(function(response) {
+            console.log(response.data, "加smallreply");
+            window.location.reload();
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
     },
     changeRows() {
       $("#small-text").attr("rows", "4");
@@ -62,6 +88,7 @@ export default {
   mounted() {
     this.userId = localStorage.getItem("user_id");
     this.userName = localStorage.getItem("user_name");
+    this.getAllBan();
   }
 };
 </script >

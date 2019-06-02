@@ -72,7 +72,7 @@ export default {
   methods: {
     getSectionById() {
       let self = this;
-      axios
+      this.axios
         .post("/getSectionById", {
           params: {
             section_id: self.sectionId
@@ -90,7 +90,7 @@ export default {
     },
     updateSection() {
       let self = this;
-      axios
+      this.axios
         .post("/updateSection", {
           params: {
             section_id: self.sectionId,
@@ -109,7 +109,7 @@ export default {
     },
     getAllChapter() {
       let self = this;
-      axios
+      this.axios
         .get("/getAllChapter")
         .then(function(response) {
           self.chapterList = response.data.data;

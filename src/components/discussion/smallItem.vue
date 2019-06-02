@@ -44,7 +44,7 @@ export default {
     },
     deleteReply() {
       let self = this;
-      axios
+      this.axios
         .post("/deleteReplyById", {
           params: {
             reply_id: self.smallItem.reply_id

@@ -5,11 +5,12 @@
 </template>
 
 <script>
+
 export default {
   name: "App",
   created() {
     let self = this;
-    axios
+    this.axios
       .get("/getRight")
       .then(function(response) {
         self.$store.commit("initUserRouter", response.data.data);

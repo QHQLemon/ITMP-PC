@@ -35,15 +35,6 @@
                 <label for="calss-name">班级名称</label>
                 <input type="text" class="form-control" id="calss-name" v-model="className">
               </div>
-              <!-- <div class="form-group">
-                <label for="calss-num">班级人数</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  v-model="classNum"
-                  id="calss-num"
-                >
-              </div>-->
             </form>
           </div>
           <div class="modal-footer">
@@ -114,7 +105,7 @@ export default {
     insertClass() {
       // console.log(this.className, this.classNum)
       let self = this;
-      axios
+      this.axios
         .post("/insertClass", {
           params: {
             class_name: self.className
@@ -130,7 +121,7 @@ export default {
     },
     updateClass() {
       let self = this;
-      axios
+      this.axios
         .post("/updateClass", {
           params: {
             class_name: self.editClassName,
@@ -252,7 +243,7 @@ export default {
                 self.classId = row.class_id;
               },
               "click .delete": function(e, value, row, index) {
-                axios
+                self.axios
                   .post("/deleteClass", {
                     params: { class_id: row.class_id }
                   })

@@ -43,7 +43,7 @@ export default {
   methods: {
     getCaseByEnshrine() {
       let self = this;
-      axios
+      this.axios
         .get("/getCaseByEnshrine")
         .then(function(response) {
           self.mycase = response.data.data;

@@ -81,7 +81,7 @@ export default {
       $.bootstrapLoading.start();
       for (let i = 0; i < self.taskList.length; i++) {
         self.taskAnswer = $("#taskAnswer" + self.taskList[i].task_id).val();
-        axios
+        this.axios
           .post("/insertTaskScore", {
             params: {
               task_id: self.taskList[i].task_id,
@@ -102,7 +102,7 @@ export default {
     },
     getTaskByChapterId() {
       let self = this;
-      axios
+      this.axios
         .post("/getTaskByChapterId", {
           params: {
             chapter_id: self.chapterId
@@ -123,7 +123,7 @@ export default {
     checkCompleteFlag() {
       let self = this;
       for (let i = 0; i < self.taskList.length; i++) {
-        axios
+        this.axios
           .post("/getTaskScoreByTaskIdAndStudentId", {
             params: {
               task_id: self.taskList[i].task_id,

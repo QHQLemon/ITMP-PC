@@ -23,7 +23,7 @@
           tag="span"
         >
           <span class="glyphicon glyphicon-edit"></span>
-        </router-link>|
+        </router-link>&nbsp; |
         <span @click="deleteTopic" class="glyphicon glyphicon-trash"></span>
       </div>
     </div>
@@ -53,6 +53,8 @@ export default {
       userId: "",
       userName: "小H",
       like: false,
+      submitFlag: true,
+      noGoodWord: [],
       replyList: [
         //   {
         //     reply_id: 1,
@@ -118,7 +120,7 @@ export default {
     },
     getTopicById() {
       let self = this;
-      axios
+      this.axios
         .post("/queryTopicById", {
           params: {
             topic_id: self.topicId
@@ -126,7 +128,17 @@ export default {
         })
         .then(function(response) {
           self.topicItem = response.data.data[0];
-          $.bootstrapLoading.end();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    getAllBan() {
+      let self = this;
+      this.axios
+        .get("/getAllBan")
+        .then(function(response) {
+          self.noGoodWord = response.data.data;
         })
         .catch(function(error) {
           console.log(error);
@@ -134,7 +146,7 @@ export default {
     },
     getReplyByTopicId() {
       let self = this;
-      axios
+      this.axios
         .post("/getReplyByTopicId", {
           params: {
             topic_id: self.topicId
@@ -149,7 +161,7 @@ export default {
     },
     deleteTopic() {
       let self = this;
-      axios
+      this.axios
         .post("/deleteTopicById", {
           params: {
             topic_id: self.topicItem.topic_id
@@ -165,7 +177,7 @@ export default {
 
     addTopicLook() {
       let self = this;
-      axios
+      this.axios
         .post("/addTopicLookOrLikeOrReply", {
           params: {
             topic_id: self.topicId,
@@ -181,22 +193,21 @@ export default {
     },
     addTopicReply() {
       let self = this;
-      axios
+      this.axios
         .post("/addTopicLookOrLikeOrReply", {
           params: {
             topic_id: self.topicId,
             add_type: "topic_reply"
           }
         })
-        .then(function(response) {
-        })
+        .then(function(response) {})
         .catch(function(error) {
           console.log(error);
         });
     },
     // addTopicLike() {
     //   let self = this;
-    //   axios
+    //   this.axios
     //     .post("/addTopicLookOrLikeOrReply", {
     //       params: {
     //         topic_id: self.topicId,
@@ -210,7 +221,7 @@ export default {
     // },
     getTopicLike() {
       let self = this;
-      axios
+      this.axios
         .post("/getTopicLike", {
           params: {
             topic_id: self.topicId,
@@ -218,10 +229,10 @@ export default {
           }
         })
         .then(function(response) {
-          if(response.data.data.length > 0){
+          if (response.data.data.length > 0) {
             self.like = true;
           }
-          console.log(self.like)
+          console.log(self.like);
         })
         .catch(function(error) {
           console.log(error);
@@ -229,7 +240,7 @@ export default {
     },
     deleteTopicLike() {
       let self = this;
-      axios
+      this.axios
         .post("/deleteTopicLike", {
           params: {
             topic_id: self.topicId,
@@ -243,7 +254,7 @@ export default {
     },
     insertTopicLike() {
       let self = this;
-      axios
+      this.axios
         .post("/insertTopicLike", {
           params: {
             topic_id: self.topicId,
@@ -271,30 +282,42 @@ export default {
       if (this.like == false) {
         this.topicItem.topic_like++;
         this.like = true;
-        this.insertTopicLike()
+        this.insertTopicLike();
       } else {
         this.topicItem.topic_like--;
         this.like = false;
-        this.deleteTopicLike()
+        this.deleteTopicLike();
       }
     },
     submitDis() {
-      let self = this;
-      axios
-        .post("/insertReply", {
-          params: {
-            topic_id: self.topicId,
-            reply_content: self.replyContent,
-            from_id: self.userId,
-            from_name: self.userName
-          }
-        })
-        .then(function(response) {
+      let len = this.noGoodWord.length;
+      console.log(this.replyContent, this.noGoodWord);
+      for (let i = 0; i < len; i++) {
+        let word = this.noGoodWord[i].ban_word;
+        if (this.replyContent.indexOf(word) != -1) {
+          this.submitFlag = false;
+          alert("你所提交的主题含有涉及不符合国家法律的内容，请重新输入并提交");
           window.location.reload();
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+        }
+      }
+      if (this.submitFlag) {
+        let self = this;
+        this.axios
+          .post("/insertReply", {
+            params: {
+              topic_id: self.topicId,
+              reply_content: self.replyContent,
+              from_id: self.userId,
+              from_name: self.userName
+            }
+          })
+          .then(function(response) {
+            window.location.reload();
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
     }
   },
   mounted() {
@@ -304,8 +327,8 @@ export default {
     this.getTopicById();
     this.getReplyByTopicId();
     this.addTopicLook();
-    this.getTopicLike()
-    $.bootstrapLoading.start();
+    this.getTopicLike();
+    this.getAllBan();
   }
 };
 </script >

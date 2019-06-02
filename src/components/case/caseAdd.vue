@@ -101,7 +101,7 @@ export default {
       let self = this;
       this.mediaType = $(':radio[name="upload-type"]:checked').val();
       console.log(this.caseType);
-      axios
+      this.axios
         .post("/insertCase", {
           params: {
             case_type: self.caseType,

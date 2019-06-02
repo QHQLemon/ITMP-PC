@@ -190,7 +190,7 @@ export default {
   methods: {
     getAllChapter() {
       let self = this;
-      axios
+      this.axios
         .get("/getAllChapter")
         .then(function(response) {
           self.chapterList = response.data.data;
@@ -201,7 +201,7 @@ export default {
     },
     insertTest() {
       let self = this;
-      axios
+      this.axios
         .post("/insertTest", {
           params: {
             test_content: self.testContent,
@@ -229,7 +229,7 @@ export default {
     },
     editTest() {
       let self = this;
-      axios
+      this.axios
         .post("/updateTest", {
           params: {
             test_id: self.testEditId,
@@ -393,7 +393,7 @@ export default {
                 self.oldChapterId = row.chapter_id;
               },
               "click .delete": function(e, value, row, index) {
-                axios
+                self.axios
                   .post("/deleteTest", {
                     params: {
                       test_id: row.test_id,

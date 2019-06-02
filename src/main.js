@@ -6,8 +6,9 @@ import router from './router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/css/bootstrap-theme.css'
 import 'bootstrap/dist/js/bootstrap.min'
+
 import '@/assets/css/main.css'
-import 'axios'
+
 import $ from 'jquery' ;
 import store from'@/store/store'
 
@@ -15,6 +16,15 @@ import store from'@/store/store'
 // import '@/components/text/jquery.hotkeys'
 // import '@/components/text/index'
 import '@/assets/js/main'
+import axios from 'axios'
+// import 'axios/dist/axios'
+// import '@/assets/js/axios'
+// import axios from '@/assets/js/axios'
+// import 'axios'
+
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios,axios);
 
 import '@/assets/css/bootstrap-table.css'
 import 'bootstrap-table/dist/bootstrap-table'

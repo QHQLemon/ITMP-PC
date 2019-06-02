@@ -177,7 +177,7 @@ export default {
                 });
               },
               "click .delete": function(e, value, row, index) {
-                axios
+                self.axios
                   .post("/deleteSection", {
                     params: {
                       section_id: row.section_id
@@ -202,7 +202,7 @@ export default {
     },
     getAllChapter() {
       let self = this;
-      axios
+      this.axios
         .get("/getAllChapter")
         .then(function(response) {
           self.chapterList = response.data.data;

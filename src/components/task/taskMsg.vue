@@ -148,7 +148,7 @@ export default {
   methods: {
     insertTask() {
       let self = this;
-      axios
+      this.axios
         .post("/insertTask", {
           params: {
             task_content: self.taskContent,
@@ -168,7 +168,7 @@ export default {
     },
     editTask() {
       let self = this;
-      axios
+      this.axios
         .post("/updateTask", {
           params: {
             task_content: self.taskEditContent,
@@ -189,7 +189,7 @@ export default {
     },
     getAllChapter() {
       let self = this;
-      axios
+      this.axios
         .get("/getAllChapter")
         .then(function(response) {
           self.chapterList = response.data.data;
@@ -315,7 +315,7 @@ export default {
                 self.taskEditId = row.task_id;
               },
               "click .delete": function(e, value, row, index) {
-                axios
+                self.axios
                   .post("/deleteTask", {
                     params: {
                       task_id: row.task_id

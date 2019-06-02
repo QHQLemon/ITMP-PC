@@ -282,8 +282,12 @@ function getReplyByReplyId(reply_id, success) {
   connection.connect();
   connection.query(sql, params, (err, result) => {
     if (err == null) {
+      console.log('hahahhahahhah')
       console.log(result[0])
-      success(result[0].topic_id)
+      if(result[0]){
+        success(result[0].topic_id)
+      }
+
     } else {
       console.log(err)
     }

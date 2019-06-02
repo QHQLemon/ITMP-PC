@@ -142,7 +142,7 @@ export default {
               //   console.log(row);
               // },
               "click .delete": function(e, value, row, index) {
-                axios
+                self.axios
                   .post("/deleteTestScoreByChapterIdAndStudentId", {
                     params: {
                       chapter_id: row.chapter_id,

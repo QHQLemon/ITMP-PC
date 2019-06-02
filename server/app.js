@@ -222,6 +222,11 @@ app.post('/insertAdmin', loader.get('/insertAdmin'))
 app.post('/updateAdmin', loader.get('/updateAdmin'))
 app.post('/deleteAdmin', loader.get('/deleteAdmin'))
 
+// 敏感词
+app.get('/getAllBan', loader.get('/getAllBan'))
+app.post('/insertBan', loader.get('/insertBan'))
+app.post('/deleteBan', loader.get('/deleteBan'))
+
 app.post('/login', loader.get('/login'))
 app.post('/changePwd', loader.get('/changePwd'))
 

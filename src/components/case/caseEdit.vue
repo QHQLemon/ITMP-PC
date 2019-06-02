@@ -104,7 +104,7 @@ export default {
       this.mediaType = $(':radio[name="upload-type"]:checked').val();
       console.log(this.caseType);
 
-      axios
+      this.axios
         .post("/updateCase", {
           params: {
             case_type: self.caseType,
@@ -128,7 +128,7 @@ export default {
     getCaseById() {
       let self = this;
       this.mediaType = $(':radio[name="upload-type"]:checked').val();
-      axios
+      this.axios
         .post("/getCaseById", {
           params: {
             case_id: self.caseId

@@ -45,7 +45,7 @@ export default {
     },
     submitNotice() {
       let self = this;
-      axios
+      this.axios
         .post("/insertNotice", {
           params: {
           notice_title: self.noticeTitle,

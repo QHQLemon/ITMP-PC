@@ -81,7 +81,7 @@ export default {
         $.bootstrapLoading.end();
       } else {
         let self = this;
-        axios
+        this.axios
           .post("/changePwd", {
             params: {
               oldPwd: self.oldpwd,

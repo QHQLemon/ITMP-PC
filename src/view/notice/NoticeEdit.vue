@@ -48,7 +48,7 @@ export default {
     submitNotice() {
       let self = this;
       console.log(this.noticeContent, this.noticeTitle)
-      axios
+      this.axios
         .post("/updateNotice", {
           params: {
           notice_id: self.$route.params.notice_id,
@@ -68,7 +68,7 @@ export default {
   created() {
     console.log(this.$route.params.notice_id);
     let self = this;
-    axios
+    this.axios
       .post("/getNoticeById", {
         params: {
         notice_id: self.$route.params.notice_id

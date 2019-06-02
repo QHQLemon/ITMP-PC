@@ -55,7 +55,7 @@ export default {
   methods: {
     getAllChapter() {
       let self = this;
-      axios
+      this.axios
         .get("/getAllChapter")
         .then(function(response) {
           self.chapterList = response.data.data;

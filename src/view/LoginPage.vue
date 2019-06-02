@@ -55,7 +55,7 @@ export default {
          $.bootstrapLoading.end();
       } else {
         let self = this;
-        axios
+        this.axios
           .post("/login", {
             params: {
               user_id: self.userName,
@@ -88,9 +88,9 @@ export default {
     },
     getRight() {
       let self = this;
-      // axios.defaults.headers.common["token"] = localStorage.getItem("token");
-      // axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8"; //配置请求头
-      axios
+      // this.axios.defaults.headers.common["token"] = localStorage.getItem("token");
+      // this.axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8"; //配置请求头
+      this.axios
         .get("/getRight")
         .then(function(response) {
           self.$store.commit("initUserRouter", response.data.data);

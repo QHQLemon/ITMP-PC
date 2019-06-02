@@ -7,6 +7,7 @@ import Notice from '@/view/Notice'
 import Case from '@/view/Case'
 import Learn from '@/view/Learn'
 import CaseMsg from '@/view/CaseMsg'
+import TopicMsg from '@/view/TopicMsg'
 import CourseContentMsg from '@/view/CourseContentMsg'
 import Discussion from '@/view/Discussion'
 import User from '@/view/User'
@@ -115,6 +116,11 @@ let router = new Router({
           path: 'notice',
           name: 'notice',
           component: Notice
+        },
+        {
+          path: 'topicMsg',
+          name: 'topicMsg',
+          component: TopicMsg
         },
         {
           path: 'case',

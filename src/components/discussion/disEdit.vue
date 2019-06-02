@@ -45,7 +45,7 @@ export default {
     },
     getTopicById() {
       let self = this;
-      axios
+      this.axios
         .post("/queryTopicById", {
           params: {
             topic_id: self.topicId
@@ -61,7 +61,7 @@ export default {
     },
     updateTopic() {
       let self = this;
-      axios
+      this.axios
         .post("/updateTopic", {
           params: {
             topic_id: self.topicId,

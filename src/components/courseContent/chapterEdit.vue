@@ -34,7 +34,7 @@ export default {
   methods: {
     getChapterById() {
       let self = this;
-      axios
+      this.axios
         .post("/getChapterById", {
           params: {
             chapter_id: self.chapterId
@@ -50,7 +50,7 @@ export default {
     },
     updateChapter() {
       let self = this;
-      axios
+      this.axios
         .post("/updateChapter", {
           params: {
             chapter_id: self.chapterId,

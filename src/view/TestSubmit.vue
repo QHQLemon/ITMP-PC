@@ -151,7 +151,7 @@ export default {
   methods: {
     getTestByChapterId() {
       let self = this;
-      axios
+      this.axios
         .post("/getTestByChapterId", {
           params: {
             chapter_id: self.chapterId
@@ -168,7 +168,7 @@ export default {
     },
     getTestScoreByChapterIdAndStudentId() {
       let self = this;
-      axios
+      this.axios
         .post("/getTestScoreByChapterIdAndStudentId", {
           params: {
             chapter_id: self.chapterId,
@@ -217,7 +217,7 @@ export default {
 
     getTestAnswerByChapterId() {
       let self = this;
-      axios
+      this.axios
         .post("/getTestAnswerByChapterId", {
           params: {
             chapter_id: self.chapterId
@@ -240,7 +240,7 @@ export default {
           ":radio[name=" + ele.test_id + "]:checked"
         ).val();
       });
-      axios
+      this.axios
         .post("/checkAndInsertTestAnswer", {
           params: {
             chapter_id: self.chapterId,

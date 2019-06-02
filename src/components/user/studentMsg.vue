@@ -14,7 +14,7 @@
           class="form-control"
           name="class"
           id="classId"
-          v-model="classId"
+          v-model="classNum"
           @change="seachAction"
         >
           <option value>全部班级</option>
@@ -78,7 +78,7 @@
               </div>
               <div class="form-group">
                 <label for="studentPwd">学生密码</label>
-                <input type="text" class="form-control" id="studentPwd" v-model="studentPwd">
+                <input type="password" class="form-control" id="studentPwd" v-model="studentPwd">
               </div>
               <div class="form-group">
                 <label for="classId">班级编号</label>
@@ -129,7 +129,7 @@
               </div>
               <div class="form-group">
                 <label for="studentPwd">学生密码</label>
-                <input type="text" class="form-control" id="studentPwd" v-model="studentEditPwd">
+                <input type="password" class="form-control" id="studentPwd" v-model="studentEditPwd">
               </div>
               <div class="form-group">
                 <label for="classId">班级编号</label>
@@ -192,7 +192,7 @@
 export default {
   data() {
     return {
-      classId: "",
+      classNum: "",
       msg: "",
       studentId: "",
       studentName: "",
@@ -221,7 +221,7 @@ export default {
   methods: {
     getAllClass() {
       let self = this;
-      axios
+      this.axios
         .get("/getAllClass")
         .then(function(response) {
           console.log(response.data.data);
@@ -233,7 +233,7 @@ export default {
     },
     insertStudent() {
       let self = this;
-      axios
+      this.axios
         .post("/insertStudent", {
           params: {
             student_id: self.studentId,
@@ -261,7 +261,7 @@ export default {
         self.studentEditPwd,
         self.classEditId
       );
-      axios
+      this.axios
         .post("/updateStudent", {
           params: {
             student_id: self.studentEditId,
@@ -334,7 +334,7 @@ export default {
             page: params.offset / params.limit + 1, //页码
             sort: "notice_id", //排序列名
             sortOrder: params.order, //排位命令（desc，asc）
-            searchWord: self.classId
+            searchWord: self.classNum
           };
           return temp;
         },
@@ -408,7 +408,7 @@ export default {
                 self.updateStudent();
               },
               "click .delete": function(e, value, row, index) {
-                axios
+                self.axios
                   .post("/deleteStudent", {
                     params: {
                       student_id: row.student_id,
@@ -453,7 +453,7 @@ export default {
         console.log(file)
         form.append("file", file);
         let self = this;
-        axios
+        this.axios
           .post("/upload", form)
           .then(function(response) {
             alert("插入数据成功");

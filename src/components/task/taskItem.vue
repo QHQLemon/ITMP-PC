@@ -82,7 +82,7 @@ export default {
     },
     submitTaskScore() {
       let self = this;
-      axios
+      this.axios
         .post("/updateTaskScore", {
           params: {
             task_id: self.taskScoreList[self.taskScoreIndex].task_id,
@@ -100,7 +100,7 @@ export default {
     },
     getTaskByChapterId() {
       let self = this;
-      axios
+      this.axios
         .post("/getTaskByChapterId", {
           params: {
             chapter_id: self.chapterId
@@ -120,7 +120,7 @@ export default {
     },
     getTaskScoreByTaskId() {
       let self = this;
-      axios
+      this.axios
         .post("/getTaskScoreByTaskId", {
           params: {
             task_id: self.taskList[self.taskListIndex].task_id

@@ -18,7 +18,7 @@ export default{
   methods: {
     getChapterById(){
       let self = this;
-      axios
+      this.axios
         .post("/getChapterById", {
           params: {
             chapter_id: self.$route.params.chapter_id,

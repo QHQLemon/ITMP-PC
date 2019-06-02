@@ -64,7 +64,7 @@ export default {
   methods: {
     insertSection() {
       let self = this;
-      axios
+      this.axios
         .post("/insertSection", {
           params: {
             section_name: self.sectionName,
@@ -82,7 +82,7 @@ export default {
     },
     getAllChapter() {
       let self = this;
-      axios
+      this.axios
         .get("/getAllChapter")
         .then(function(response) {
           self.chapterList = response.data.data;

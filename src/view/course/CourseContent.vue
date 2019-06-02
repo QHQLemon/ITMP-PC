@@ -192,7 +192,7 @@ export default {
   methods: {
     getChapterAndSection() {
       let self = this;
-      axios
+      this.axios
         .get("/getChapterAndSection")
         .then(function(response) {
           self.CASList = response.data.data;

@@ -323,7 +323,7 @@ export default {
     },
     getChapterAndSection() {
       let self = this;
-      axios
+      this.axios
         .get("/getChapterAndSection")
         .then(function(response) {
           self.CASList = response.data.data;
@@ -336,7 +336,7 @@ export default {
 
     getSectionMaxId() {
       let self = this;
-      axios
+      this.axios
         .get("/getSectionMaxId")
         .then(function(response) {
           self.maxId = response.data.data[0].max_id;
@@ -347,7 +347,7 @@ export default {
     },
     getSectionById() {
       let self = this;
-      axios
+      this.axios
         .post("/getSectionById", {
           params: {
             section_id: self.sectionId

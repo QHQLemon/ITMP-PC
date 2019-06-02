@@ -32,7 +32,7 @@ export default {
   methods: {
     insertChapter() {
       let self = this;
-      axios
+      this.axios
         .post("/insertChapter", {
           params: {
             chapter_name: self.chapterTitle,

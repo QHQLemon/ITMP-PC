@@ -82,7 +82,7 @@ export default {
   methods: {
     getUserMsg() {
       let self = this;
-      axios
+      this.axios
         .post("/getUserMsg", {
           params: {
             user_id: self.userId
@@ -99,7 +99,7 @@ export default {
           // $.bootstrapLoading.end();
 
       let self = this;
-      axios
+      this.axios
         .post("/getEnshrineByUserId", {
           params: {
             user_id: self.userId
@@ -115,7 +115,7 @@ export default {
     },
     getReplyByUserId() {
       let self = this;
-      axios
+      this.axios
         .post("/getReplyByUserId", {
           params: {
             user_id: self.userId
@@ -131,7 +131,7 @@ export default {
 
     getTopicByUserId() {
       let self = this;
-      axios
+      this.axios
         .post("/getTopicByUserId", {
           params: {
             user_id: self.userId

@@ -50,7 +50,7 @@ export default {
   methods: {
     getAllChapter() {
       let self = this;
-      axios
+      this.axios
         .get("/getAllChapter")
         .then(function(response) {
           self.chapterList = response.data.data;
@@ -183,7 +183,7 @@ export default {
           //       console.log(row);
           //     },
           //     "click .delete": function(e, value, row, index) {
-          //       axios
+          //       this.axios
           //         .post("/deleteTest", {
           //           test_id: row.test_id,
           //           chapter_id: row.chapter_id

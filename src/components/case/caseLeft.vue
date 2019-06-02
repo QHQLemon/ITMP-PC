@@ -150,7 +150,7 @@ export default {
     },
     getCaseByPage() {
       let self = this;
-      axios
+      this.axios
         .get("/getCaseByPage", {
           params: {
             case_type: self.caseType,

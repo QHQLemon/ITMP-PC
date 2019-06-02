@@ -23,7 +23,7 @@ export default {
   methods: {
     deleteNotice(id) {
       let self = this;
-      axios
+      this.axios
         .post("/deleteNotice", {
           params: {
             notice_id: id

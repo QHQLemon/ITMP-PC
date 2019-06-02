@@ -124,7 +124,7 @@ export default {
   methods: {
     insertAdmin() {
       let self = this;
-      axios
+      this.axios
         .post("/insertAdmin", {
           params: {
             admin_id: self.adminId,
@@ -143,7 +143,7 @@ export default {
     updateAdmin() {
       let self = this;
       console.log(self.adminEditId, self.adminEditName, self.adminEditPwd);
-      axios
+      this.axios
         .post("/updateAdmin", {
           params: {
             admin_id: self.adminEditId,
@@ -271,7 +271,7 @@ export default {
                 self.adminEditPwd = row.admin_pwd;
               },
               "click .delete": function(e, value, row, index) {
-                axios
+                self.axios
                   .post("/deleteAdmin", {
                     params: {
                       admin_id: row.admin_id

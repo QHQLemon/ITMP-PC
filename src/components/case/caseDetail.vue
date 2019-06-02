@@ -138,7 +138,7 @@ export default {
     },
     getCaseById() {
       let self = this;
-      axios
+      this.axios
         .post("/getCaseById", {
           params: {
             case_id: self.caseId
@@ -153,7 +153,7 @@ export default {
     },
     addStudentEnshrine() {
       let self = this;
-      axios
+      this.axios
         .post("/addStudentEnshrine", {
           params: {
             case_id: self.caseId,
@@ -169,7 +169,7 @@ export default {
     },
     minusStudentEnshrine() {
       let self = this;
-      axios
+     this.axios
         .post("/minusStudentEnshrine", {
           params: {
             case_id: self.caseId,
@@ -185,7 +185,7 @@ export default {
     },
     getStudentAndEnshrine() {
       let self = this;
-      axios
+      this.axios
         .post("/getStudentAndEnshrine", {
           params: {
             case_id: self.caseId,

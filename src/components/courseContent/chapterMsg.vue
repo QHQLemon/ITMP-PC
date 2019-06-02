@@ -141,7 +141,7 @@ export default {
                 });
               },
               "click .delete": function(e, value, row, index) {
-                axios
+                self.axios
                   .post("/deleteChapter", {
                     params: {
                       chapter_id: row.chapter_id
