@@ -11,7 +11,9 @@
             <p>建议学时： 4小时每周</p>
           </div>
           <div class="rec-btn">
-            <button class="btn btn-default  my-btn">开始学习</button>
+            <router-link
+            tag="button"
+            :to="{name: 'learn', params: {section_id: 2}}" class="btn btn-default  my-btn">开始学习</router-link>
           </div>
         </div>
       </div>
